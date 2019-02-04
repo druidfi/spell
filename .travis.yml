@@ -26,4 +26,4 @@ install:
 
 script:
   - composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
-  - make new
+  - make
