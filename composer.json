@@ -65,19 +65,11 @@
         }
     ],
     "scripts": {
-        "build-development": [
-            "@composer install --prefer-dist --no-suggest --ansi"
-        ],
-        "build-testing": [
-            "@composer build-production"
-        ],
-        "build-production": [
-            "@composer install --no-dev --prefer-dist --no-suggest --optimize-autoloader --ansi"
-        ],
         "post-create-project-cmd": [
             "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
             "DRUPAL_DIRECTORY=${PWD##*\/} && sed -i -e 's|mysite|'\"${DRUPAL_DIRECTORY}\"'|g' .env",
             "mv README.project.md README.md",
+            "make self-update",
             "git init && git add ."
         ],
         "drupal-scaffold": [
@@ -109,9 +101,6 @@
             "@composer update druidfi/amazeeio-scripts",
             "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
             "git status -s"
-        ],
-        "update-deps": [
-            "@composer update --with-dependencies --no-scripts --no-suggest --prefer-dist --ignore-platform-reqs --ansi"
         ]
     }
 }
