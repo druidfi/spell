@@ -76,7 +76,7 @@
         ],
         "post-create-project-cmd": [
             "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
-            "DRUPAL_DIRECTORY=${PWD##*\/} && sed -i bak -e 's|mysite|'\"${DRUPAL_DIRECTORY}\"'|g' .env",
+            "DRUPAL_DIRECTORY=${PWD##*\/} && sed -i -e 's|mysite|'\"${DRUPAL_DIRECTORY}\"'|g' .env",
             "mv README.project.md README.md",
             "git init && git add ."
         ],
