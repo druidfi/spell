@@ -30,11 +30,7 @@ docker run --rm -it --user=drupal -v $PWD:/var/www/drupal/public_html \
     composer create-project druidfi/spell:dev-master . --no-interaction
 ```
 
-### Change configuration
-
-Change hostname for your local site in the `YOUR_PROJECT/docker-compose.yml`:
-
-`hostname: &hostname mysite.fi.docker.amazee.io` to `hostname: &hostname yoursite.fi.docker.amazee.io`
+## Get started
 
 Start the development environment, build development codebase and install empty site:
 
