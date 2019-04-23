@@ -11,7 +11,6 @@ public/profiles/config_installer
 public/profiles/contrib
 public/libraries
 public/sites/default/files
-tests
 tools/init-tools-status
 vendor
 
