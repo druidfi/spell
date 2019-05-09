@@ -18,12 +18,11 @@
         "drupal-composer/drupal-scaffold": "^2.0",
         "drupal/admin_toolbar": "^1.0",
         "drupal/cdn": "^3.2",
-        "drupal/core": "^8.6",
+        "drupal/core": "^8.7.1",
         "drupal/pathauto": "^1.0",
         "drupal/swiftmailer": "^1.0@beta",
         "drupal/system_status": "^2.0",
-        "drush/drush": "^9",
-        "wikimedia/composer-merge-plugin": "^1.0"
+        "drush/drush": "^9"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
@@ -42,11 +41,6 @@
         "sort-packages": true
     },
     "extra": {
-        "merge-plugin": {
-            "include": [
-                "public/modules/custom/*/composer.json"
-            ]
-        },
         "installer-paths": {
             "public/core": ["type:drupal-core"],
             "public/libraries/{$name}": ["type:drupal-library"],

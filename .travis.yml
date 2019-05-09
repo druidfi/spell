@@ -25,7 +25,7 @@ install:
 #  - pygmy up
 
 script:
-  - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
+  - travis_retry composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
 #  - composer fix
 #  - composer test-unit
 #  - cd mysite
