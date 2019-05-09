@@ -50,4 +50,11 @@ help: ## List all make commands
 PHONY += self-update
 self-update: ## Self-update makefiles from druidfi/tools
 	$(call colorecho, "Update makefiles from druidfi/tools")
-	@bash -c "$$(curl -fsSL -H 'Cache-Control: no-cache' ${UPDATE_SCRIPT_URL})"
+	@bash -c "$$(curl -fsSL ${UPDATE_SCRIPT_URL})"
+
+PHONY += self-update
+sync: $(SYNC_TARGETS) ## Sync data from other environments
+	$(call colorecho, "\nStart sync")
+	$(call colorecho, "- Following targets will be run: $(SYNC_TARGETS)")
+	@$(MAKE) $(SYNC_TARGETS) ENV=$(ENV)
+	$(call colorecho, "\nSync completed.")
