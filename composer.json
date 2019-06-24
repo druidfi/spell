@@ -18,7 +18,7 @@
         "drupal-composer/drupal-scaffold": "^2.0",
         "drupal/admin_toolbar": "^1.0",
         "drupal/cdn": "^3.2",
-        "drupal/core": "^8.7.1",
+        "drupal/core": "^8.7",
         "drupal/pathauto": "^1.0",
         "drupal/swiftmailer": "^1.0@beta",
         "drupal/system_status": "^2.0",
@@ -60,11 +60,7 @@
     ],
     "scripts": {
         "post-create-project-cmd": [
-            "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
-            "DRUPAL_DIRECTORY=${PWD##*\/} && sed -i -e 's|mysite|'\"${DRUPAL_DIRECTORY}\"'|g' .env",
-            "mv README.project.md README.md",
-            "make self-update",
-            "git init && git add ."
+            "make spell-init"
         ],
         "drupal-scaffold": [
             "DrupalComposer\\DrupalScaffold\\Plugin::scaffold"
@@ -73,13 +69,9 @@
             "phpcbf --colors --standard=Drupal --extensions=php,theme,module --ignore='*.css,*.md,node_modules' ./public/modules/custom ./public/themes/custom"
         ],
         "test": [
-            "@test-behavioral",
             "@test-static-js",
             "@test-static-php",
             "@test-unit"
-        ],
-        "test-behavioral": [
-            "tools/behavioral-tests"
         ],
         "test-static-js": [
             "node_modules/eslint/bin/eslint.js --color --ignore-pattern '**/vendor/*' --c ./public/core/.eslintrc.json --global nav,moment,responsiveNav:true ./public/modules/custom/*/js",
@@ -90,11 +82,6 @@
         ],
         "test-unit": [
             "phpunit -c phpunit.xml.dist --testsuite unit"
-        ],
-        "update-amazeeio-scripts": [
-            "@composer update druidfi/amazeeio-scripts",
-            "rsync -av vendor/druidfi/amazeeio-scripts/dist/ .",
-            "git status -s"
         ]
     }
 }
