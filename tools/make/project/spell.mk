@@ -5,6 +5,6 @@ spell-init: ## Init Spell project
 	@rsync -av vendor/druidfi/amazeeio-scripts/dist/ .
 	@sed -i -e 's|mysite|'"${BASENAME}"'|g' .env
 	@mv README.project.md README.md
-	@rm LICENSE.md .env-e
+	@rm LICENSE.md .env-e tools/make/project/spell.mk
 	@make self-update
 	@git init && git add .
