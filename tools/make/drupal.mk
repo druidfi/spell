@@ -2,11 +2,16 @@ SYNC_TARGETS += drush-sync
 
 PHONY += drush-cex
 drush-cex: ## Export configuration
-	$(call drush_on_docker,cex -y)
+	$(call colorecho, "\n- Export configuration (${RUN_ON})...\n")
+ifeq (${DRUPAL_VERSION},7)
+	@echo "- \"drush cex\" is not Drupal 7 command ${YELLOW}[warning]${NO_COLOR}"
+else
+	$(call drush_on_${RUN_ON},cex -y)
+endif
 
 PHONY += drush-cim
 drush-cim: ## Import configuration
-	$(call colorecho, "\n- Import configuration...\n")
+	$(call colorecho, "\n- Import configuration (${RUN_ON})...\n")
 ifeq (${DRUPAL_VERSION},7)
 	@echo "- \"drush cim\" is not Drupal 7 command ${YELLOW}[warning]${NO_COLOR}"
 else
@@ -22,8 +27,14 @@ drush-uli: ## Get login link
 	$(call colorecho, "\n- Login to your site with:\n")
 	$(call drush_on_${RUN_ON},uli)
 
+PHONY += drush-si
+ifeq ($(DRUPAL_VERSION),7)
+    drush-si: DRUSH_SI := -y
+else
+    drush-si: DRUSH_SI := -y --existing-config
+endif
 drush-si: ## Site install
-	$(call drush_on_${RUN_ON}, -y si --existing-config)
+	$(call drush_on_${RUN_ON},si ${DRUSH_SI})
 
 PHONY += drush-updb
 drush-updb: ## Run database updates
@@ -36,7 +47,7 @@ fresh: up build sync post-install ## Build fresh development environment and syn
 PHONY += new
 new: up build drush-si drush-uli ## Create a new empty Drupal installation from configuration
 
-PHONY += post-actions
+PHONY += post-install
 post-install: drush-updb drush-cim drush-uli ## Run post-install Drush actions
 
 PHONY += drush-sync
@@ -51,5 +62,5 @@ define drush_on_docker
 endef
 
 define drush_on_host
-	drush --ansi --strict=0 $(1)
+	@drush --ansi --strict=0 $(1)
 endef
