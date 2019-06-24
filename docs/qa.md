@@ -4,38 +4,32 @@ Log in to the container with `make shell`
 
 ## Available commands
 
-Run all tests and checks
+Run all tests and code style checks
 
 ```
-$ composer test
+$ make test
 ```
 
 Run unit tests (PHPUnit)
 
 ```
-$ composer test-unit
+$ make test-phpunit
 ```
 
 Run static PHP checks
 
 ```
-$ composer test-static-php
+$ make lint-php
 ```
 
 Run static JS checks
 
 ```
-$ composer test-static-js
-```
-
-Run behavioral tests (Behat)
-
-```
-$ composer test-behavioral
+$ make lint-js
 ```
 
 Fix PHP code
 
 ```
-$ composer fix
+$ make fix
 ```
