@@ -11,9 +11,8 @@ addons:
       - docker-ce
 
 cache:
-  apt: true
-#  directories:
-#  - "$HOME/.composer/cache"
+  directories:
+  - "$HOME/.composer/cache"
 
 services:
   - docker
@@ -22,12 +21,10 @@ before_install:
   - rvm install 2.4
 
 install:
-#  - gem install pygmy
-#  - pygmy up
+  - gem install pygmy
+  - pygmy up
 
 script:
   - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
-#  - composer fix
-#  - composer test-unit
-#  - cd mysite
-#  - make init
+  - cd mysite
+  - make new
