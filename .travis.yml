@@ -2,6 +2,8 @@ language: php
 
 php:
   - 7.1
+#  - 7.2
+#  - 7.3
 
 addons:
   apt:
@@ -18,14 +20,13 @@ services:
 
 before_install:
   - rvm install 2.4
-  - composer self-update
 
 install:
 #  - gem install pygmy
 #  - pygmy up
 
 script:
-  - travis_retry composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
+  - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
 #  - composer fix
 #  - composer test-unit
 #  - cd mysite
