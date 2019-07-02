@@ -2,8 +2,8 @@ language: php
 
 php:
   - 7.1
-#  - 7.2
-#  - 7.3
+  - 7.2
+  - 7.3
 
 addons:
   apt:
@@ -11,6 +11,7 @@ addons:
       - docker-ce
 
 cache:
+  apt: true
   directories:
   - "$HOME/.composer/cache"
 
@@ -18,13 +19,13 @@ services:
   - docker
 
 before_install:
-  - rvm install 2.4
+#  - rvm install 2.4
 
 install:
-  - gem install pygmy
-  - pygmy up
+#  - gem install pygmy
+#  - pygmy up
 
 script:
   - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
-  - cd mysite
-  - make new
+#  - cd mysite
+#  - make new
