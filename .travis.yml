@@ -2,6 +2,7 @@ language: php
 dist: trusty
 sudo: false
 
+# Supported PHP versions to test with.
 php:
   - 7.1
   - 7.2
@@ -16,6 +17,7 @@ env:
   global:
     - BASE_URL="http://127.0.0.1:8080"
     - DB_URL=mysql://root@127.0.0.1/drupal
+    - WEBROOT=$TRAVIS_BUILD_DIR/public
 
 cache:
   directories:
@@ -23,8 +25,11 @@ cache:
   - "$HOME/.drush/cache"
 
 before_install:
+
   # This fixes a fail when install Drupal.
   - echo 'sendmail_path = /bin/true' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
+  # Disable xdebug.
   - phpenv config-rm xdebug.ini
 
   # Ensure the PHP environment is ready.
@@ -32,31 +37,25 @@ before_install:
 
 install:
 
+  # MySQL might time out for long tests, increase the wait timeout.
+  - mysql -e 'SET @@GLOBAL.wait_timeout=1200'
+
+  # Create database.
+  - mysql -e 'create database drupal;'
+
   # Do Composer install.
   - composer install --no-interaction
 
 script:
 
-  # Go to webroot.
-  - cd $TRAVIS_BUILD_DIR/public
-
-  # Mysql might time out for long tests, increase the wait timeout.
-  - mysql -e 'SET @@GLOBAL.wait_timeout=1200'
-
-  # Create database and install Drupal.
-  - mysql -e 'create database drupal;'
-  - ./../vendor/bin/drush site-install --verbose --yes --db-url="$DB_URL"
+  # Install Drupal.
+  - vendor/bin/drush --root $WEBROOT site-install --verbose --yes --db-url="$DB_URL"
 
   # Start a web server.
-  - ./../vendor/bin/drush runserver $BASE_URL &
+  - vendor/bin/drush --root $WEBROOT runserver $BASE_URL &
+
+  # Wait until Drupal responds.
   - until curl -s $BASE_URL; do true; done > /dev/null
 
-  # Run PHPUnit tests.
-  #
-  # Skip core/tests/Drupal/Tests/ComposerIntegrationTest.php because web/ has no composer.json
-  # Ignore PageCache group temporarily, @see https://www.drupal.org/node/2770673
-  # Ignore Setup group temporarily, @see https://www.drupal.org/node/2962157
-  #- ./../vendor/bin/phpunit -c core --testsuite unit --exclude-group Composer,DependencyInjection,PageCache,Setup
-
-  # Give Drush status.
-  - ./../vendor/bin/drush status
+  # Check Drush status.
+  - vendor/bin/drush --root $WEBROOT status
