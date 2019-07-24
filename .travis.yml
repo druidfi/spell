@@ -14,8 +14,10 @@ mysql:
 
 env:
   global:
-    - SIMPLETEST_DB=mysql://root@127.0.0.1/drupal
-    - SIMPLETEST_BASE_URL="http://127.0.0.1:8080"
+    - BASE_URL="http://127.0.0.1:8080"
+    - COMPOSER_BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+    - DB_URL=mysql://root@127.0.0.1/drupal
+    - PROJECT_DIR=mysite
 
 cache:
   directories:
@@ -34,19 +36,19 @@ before_install:
 script:
 
   # Do composer create-project.
-  - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
-  - cd $TRAVIS_BUILD_DIR/mysite/public
+  - travis_retry composer create-project druidfi/spell:dev-$COMPOSER_BRANCH $PROJECT_DIR --no-interaction
+  - cd $TRAVIS_BUILD_DIR/$PROJECT_DIR/public
 
   # Mysql might time out for long tests, increase the wait timeout.
   - mysql -e 'SET @@GLOBAL.wait_timeout=1200'
 
   # Create database and install Drupal.
   - mysql -e 'create database drupal;'
-  - ./../vendor/bin/drush site-install --verbose --yes --db-url="$SIMPLETEST_DB"
+  - ./../vendor/bin/drush site-install --verbose --yes --db-url="$DB_URL"
 
   # Start a web server.
-  - ./../vendor/bin/drush runserver $SIMPLETEST_BASE_URL &
-  - until curl -s $SIMPLETEST_BASE_URL; do true; done > /dev/null
+  - ./../vendor/bin/drush runserver $BASE_URL &
+  - until curl -s $BASE_URL; do true; done > /dev/null
 
   # Run PHPUnit tests.
   #
