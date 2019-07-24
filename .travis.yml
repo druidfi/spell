@@ -29,7 +29,7 @@ before_install:
   # This fixes a fail when install Drupal.
   - echo 'sendmail_path = /bin/true' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
-  # Disable xdebug.
+  # Disable Xdebug.
   - phpenv config-rm xdebug.ini
 
   # Ensure the PHP environment is ready.
@@ -59,3 +59,6 @@ script:
 
   # Check Drush status.
   - vendor/bin/drush --root $WEBROOT status
+
+  # Run lints & tests.
+  - make debug test
