@@ -7,28 +7,53 @@ php:
   - 7.2
   - 7.3
 
+mysql:
+  database: drupal
+  username: root
+  encoding: utf8
+
 env:
   global:
-    - SIMPLETEST_DB=sqlite://tmp/site.sqlite
+    - SIMPLETEST_DB=mysql://root@127.0.0.1/drupal
     - SIMPLETEST_BASE_URL="http://127.0.0.1:8080"
 
 cache:
   directories:
   - "$HOME/.composer/cache"
+  - "$HOME/.drush/cache"
 
 before_install:
+  # This fixes a fail when install Drupal.
   - echo 'sendmail_path = /bin/true' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - phpenv config-rm xdebug.ini
   - composer --version
 
+  # Ensure the PHP environment is ready.
+  - phpenv rehash
+
 script:
+
+  # Do composer create-project.
   - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer create-project druidfi/spell:dev-${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} mysite --no-interaction
   - cd $TRAVIS_BUILD_DIR/mysite/public
-  - ./../vendor/bin/drush site-install --verbose --yes --db-url=$SIMPLETEST_DB
+
+  # Mysql might time out for long tests, increase the wait timeout.
+  - mysql -e 'SET @@GLOBAL.wait_timeout=1200'
+
+  # Create database and install Drupal.
+  - mysql -e 'create database drupal;'
+  - ./../vendor/bin/drush site-install --verbose --yes --db-url="$SIMPLETEST_DB"
+
+  # Start a web server.
   - ./../vendor/bin/drush runserver $SIMPLETEST_BASE_URL &
   - until curl -s $SIMPLETEST_BASE_URL; do true; done > /dev/null
+
+  # Run PHPUnit tests.
+  #
   # Skip core/tests/Drupal/Tests/ComposerIntegrationTest.php because web/ has no composer.json
   # Ignore PageCache group temporarily, @see https://www.drupal.org/node/2770673
   # Ignore Setup group temporarily, @see https://www.drupal.org/node/2962157
   - ./../vendor/bin/phpunit -c core --testsuite unit --exclude-group Composer,DependencyInjection,PageCache,Setup
+
+  # Give Drush status.
   - ./../vendor/bin/drush status
