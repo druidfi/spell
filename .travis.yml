@@ -15,9 +15,7 @@ mysql:
 env:
   global:
     - BASE_URL="http://127.0.0.1:8080"
-    - COMPOSER_BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
     - DB_URL=mysql://root@127.0.0.1/drupal
-    - PROJECT_DIR=mysite
 
 cache:
   directories:
@@ -28,16 +26,19 @@ before_install:
   # This fixes a fail when install Drupal.
   - echo 'sendmail_path = /bin/true' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - phpenv config-rm xdebug.ini
-  - composer --version
 
   # Ensure the PHP environment is ready.
   - phpenv rehash
 
+install:
+
+  # Do Composer install.
+  - composer install --no-interaction
+
 script:
 
-  # Do composer create-project.
-  - travis_retry composer create-project druidfi/spell:dev-$COMPOSER_BRANCH $PROJECT_DIR --no-interaction
-  - cd $TRAVIS_BUILD_DIR/$PROJECT_DIR/public
+  # Go to webroot.
+  - cd $TRAVIS_BUILD_DIR/public
 
   # Mysql might time out for long tests, increase the wait timeout.
   - mysql -e 'SET @@GLOBAL.wait_timeout=1200'
@@ -55,7 +56,7 @@ script:
   # Skip core/tests/Drupal/Tests/ComposerIntegrationTest.php because web/ has no composer.json
   # Ignore PageCache group temporarily, @see https://www.drupal.org/node/2770673
   # Ignore Setup group temporarily, @see https://www.drupal.org/node/2962157
-  - ./../vendor/bin/phpunit -c core --testsuite unit --exclude-group Composer,DependencyInjection,PageCache,Setup
+  #- ./../vendor/bin/phpunit -c core --testsuite unit --exclude-group Composer,DependencyInjection,PageCache,Setup
 
   # Give Drush status.
   - ./../vendor/bin/drush status
