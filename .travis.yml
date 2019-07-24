@@ -61,4 +61,6 @@ script:
   - vendor/bin/drush --root $WEBROOT status
 
   # Run lints & tests.
-  - make debug test
+  - make debug
+  - make test-phpunit
+  - make lint-php
