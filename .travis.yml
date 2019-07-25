@@ -61,7 +61,7 @@ script:
   - vendor/bin/drush --root $WEBROOT status
 
   # Install a module to check functionality.
-  - vendor/bin/drush --root $WEBROOT dl --yes system_status
+  - composer require drupal/system_status
   - vendor/bin/drush --root $WEBROOT en --yes system_status
 
   # Show what is in public/sites/default.
