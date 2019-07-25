@@ -64,12 +64,6 @@ script:
   - composer require drupal/system_status
   - vendor/bin/drush --root $WEBROOT en --yes system_status
 
-  # Show what is in public/sites/default.
-  - ls -la public/sites/default
-
-  # Show current settings.php.
-  - cat public/sites/default/settings.php
-
   # Run lints & tests.
   - make debug
   - make test-phpunit
