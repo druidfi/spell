@@ -60,6 +60,12 @@ script:
   # Check Drush status.
   - vendor/bin/drush --root $WEBROOT status
 
+  # Install a module to check functionality.
+  - vendor/bin/drush --root $WEBROOT en --yes system_status
+
+  # Show current settings.php.
+  - cat public/sites/default/settings.php
+
   # Run lints & tests.
   - make debug
   - make test-phpunit
