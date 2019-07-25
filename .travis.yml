@@ -61,7 +61,11 @@ script:
   - vendor/bin/drush --root $WEBROOT status
 
   # Install a module to check functionality.
+  - vendor/bin/drush --root $WEBROOT dl --yes system_status
   - vendor/bin/drush --root $WEBROOT en --yes system_status
+
+  # Show what is in public/sites/default.
+  - ls -la public/sites/default
 
   # Show current settings.php.
   - cat public/sites/default/settings.php
