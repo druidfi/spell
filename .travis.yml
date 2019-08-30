@@ -44,7 +44,8 @@ install:
   - mysql -e 'create database drupal;'
 
   # Do Composer install.
-  - composer install --no-interaction
+  #- composer install --no-interaction
+  - make build
 
 script:
 
@@ -68,3 +69,7 @@ script:
   - make debug
   - make test-phpunit
   - make lint-php
+
+  # Tear down
+  - make down
+  - make clean

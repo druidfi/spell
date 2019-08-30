@@ -17,6 +17,22 @@ TEST_TARGETS := test-foobar
 UNAME_S := $(shell uname -s)
 # Shorten with https://git.io/ : https://raw.githubusercontent.com/druidfi/tools/master/update.sh
 UPDATE_SCRIPT_URL := https://git.io/fh771
+WEBROOT := public
+
+# Detect additional tooling
+AMAZEEIO_LEGACY := $(shell test -f .amazeeio.yml && echo yes || echo no)
+AMAZEEIO_LAGOON := $(shell test -f .lagoon.yml && echo yes || echo no)
+WODBY := $(shell test -f wodby.yml && echo yes || echo no)
+
+ifeq ($(AMAZEEIO_LEGACY),yes)
+	SYSTEM := AMAZEEIO
+else ifeq ($(AMAZEEIO_LAGOON),yes)
+	SYSTEM := AMAZEEIO
+else ifeq ($(WODBY),yes)
+	SYSTEM := WODBY
+else
+	SYSTEM := WHOKNOWS
+endif
 
 # Colors
 NO_COLOR=\033[0m
@@ -38,7 +54,7 @@ endif
 
 PHONY += debug
 debug: ## Show debug information
-	@echo "${GREEN}Debug starts:${NO_COLOR}"
+	@printf "${GREEN}Debug starts:${NO_COLOR}\n"
 	$(call dbg,COMPOSER_BIN,${COMPOSER_BIN})
 	$(call dbg,COMPOSER_JSON_EXISTS,${COMPOSER_JSON_EXISTS})
 	$(call dbg,CLEAN_FOLDERS,${CLEAN_FOLDERS})
@@ -50,22 +66,29 @@ debug: ## Show debug information
 	$(call dbg,ENV,${ENV})
 	$(call dbg,PHP_BIN,${PHP_BIN})
 	$(call dbg,RUN_ON,${RUN_ON})
+	$(call dbg,AMAZEEIO_LEGACY,${AMAZEEIO_LEGACY})
+	$(call dbg,AMAZEEIO_LAGOON,${AMAZEEIO_LAGOON})
+	$(call dbg,WODBY,${WODBY})
+	$(call dbg,SYSTEM,${SYSTEM})
+	$(call dbg,WEBROOT,${WEBROOT})
 	$(call dbg,UNAME_S,${UNAME_S})
 ifeq ($(RUN_ON),docker)
-	@echo "${YELLOW}Assumption: We should run on Docker and not on host${NO_COLOR}"
+	@printf "${YELLOW}Assumption: We should run on Docker and not on host${NO_COLOR}\n"
 else
-	@echo "${YELLOW}Assumption: We should run on host and not on Docker${NO_COLOR}"
+	@printf "${YELLOW}Assumption: We should run on host and not on Docker${NO_COLOR}\n"
 endif
-	@echo "${GREEN}End of debug.${NO_COLOR}"
-
-define colorecho
-	@tput -T xterm setaf 3
-	@echo $1
-	@tput -T xterm sgr0
-endef
+	@printf "${GREEN}End of debug.${NO_COLOR}\n"
 
 define dbg
-	@echo "${GREEN}${1}:${NO_COLOR} ${2}"
+	@printf "${GREEN}${1}:${NO_COLOR} ${2}\n"
+endef
+
+define step
+	@printf "\n${YELLOW}${1}${NO_COLOR}\n\n"
+endef
+
+define warn
+	@printf "\n${YELLOW}[warning]${NO_COLOR} ${1}\n\n"
 endef
 
 # Include druidfi/tools make files
