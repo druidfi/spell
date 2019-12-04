@@ -2,6 +2,7 @@
 drush/sites/
 node_modules
 public/core
+public/libraries
 public/modules/contrib
 public/themes/contrib
 public/sites/default/files

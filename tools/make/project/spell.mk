@@ -1,6 +1,6 @@
-PHONY += spell-init
-spell-init: BASENAME := $(shell basename $(CURDIR))
-spell-init: ## Init Spell project
+PHONY += cast-spell
+cast-spell: BASENAME := $(shell basename $(CURDIR))
+cast-spell: ## Init Spell project
 	$(call colorecho, "\nInit Spell project...")
 	@sed -i -e 's|mysite|'"${BASENAME}"'|g' .env
 ifeq ($(UNAME_S),Darwin)
@@ -8,7 +8,8 @@ ifeq ($(UNAME_S),Darwin)
 else
 	@sed -i '/composer.lock/d' .gitignore
 endif
+	@rm -f LICENSE.md README.md tools/make/project/spell.mk
 	@mv README.project.md README.md
-	@rm -f LICENSE.md .env-e tools/make/project/spell.mk
-	@make self-update
+	@$(MAKE) self-update
 	@git init && git add .
+	@$(MAKE) new DRUPAL_PROFILE=demo_umami
