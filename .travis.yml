@@ -44,7 +44,7 @@ install:
 
   # Do Composer install.
   #- composer install --no-interaction
-  - make build
+  - make build RUN_ON=host
 
 script:
 
