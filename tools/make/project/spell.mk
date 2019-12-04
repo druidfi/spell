@@ -12,4 +12,3 @@ endif
 	@mv README.project.md README.md
 	@$(MAKE) self-update
 	@git init && git add .
-	@$(MAKE) new DRUPAL_PROFILE=demo_umami
