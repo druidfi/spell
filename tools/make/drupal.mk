@@ -2,8 +2,12 @@ DRUPAL_CONF_EXISTS := $(shell test -f conf/cmi/core.extension.yml && echo yes ||
 DRUPAL_FRESH_TARGETS := up build sync post-install
 DRUPAL_NEW_TARGETS := up build drush-si drush-uli
 DRUPAL_POST_INSTALL_TARGETS := drush-updb drush-cim drush-uli
+DRUPAL_SYNC_FILES ?= yes
+DRUPAL_SYNC_SOURCE ?= production
+DRUPAL_VERSION ?= 8
 SYNC_TARGETS += drush-sync
 
+# TODO Remove this when DRUPAL_WEBROOT vars are removed from projects
 ifdef DRUPAL_WEBROOT
 	WEBROOT := $(DRUPAL_WEBROOT)
 endif
@@ -51,7 +55,7 @@ PHONY += drush-si
 ifeq ($(DRUPAL_CONF_EXISTS)$(DRUPAL_VERSION),yes8)
     drush-si: DRUSH_SI := -y --existing-config
 else
-    drush-si: DRUSH_SI := -y
+    drush-si: DRUSH_SI := -y minimal
 endif
 drush-si: ## Site install
 	$(call drush_on_${RUN_ON},si ${DRUSH_SI})
@@ -74,7 +78,6 @@ post-install: ## Run post-install Drush actions
 	@$(MAKE) $(DRUPAL_POST_INSTALL_TARGETS)
 
 PHONY += drush-sync
-drush-sync: DRUPAL_SYNC_FILES := yes
 drush-sync: ## Sync database and files
 	$(call step,Sync database from @$(DRUPAL_SYNC_SOURCE)...)
 	$(call drush_on_${RUN_ON},sql-sync -y @$(DRUPAL_SYNC_SOURCE) @self)
