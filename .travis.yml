@@ -54,6 +54,7 @@ install:
 script:
 
   # Install Drupal.
+  - vendor/bin/drush --root $WEBROOT status || travis_terminate 1;
   - vendor/bin/drush --root $WEBROOT site-install --verbose --yes --db-url="$DB_URL" minimal || travis_terminate 1;
 
   # Start a web server.
