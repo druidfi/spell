@@ -25,3 +25,4 @@ vendor
 !*.keepme
 # As this is project skeleton, we do not want to store composer.lock to version control
 composer.lock
+.gitattributes
