@@ -18,6 +18,10 @@ env:
     - BASE_URL="http://127.0.0.1:8080"
     - DB_URL=mysql://root@127.0.0.1/drupal
     - WEBROOT=$TRAVIS_BUILD_DIR/public
+    - DRUPAL_DB_NAME=drupal
+    - DRUPAL_DB_HOST=127.0.0.1
+    - DRUPAL_DB_USER=root
+    - DRUPAL_DB_PASS=
 
 cache:
   directories:
