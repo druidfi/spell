@@ -6,6 +6,7 @@ sudo: false
 php:
   - 7.2
   - 7.3
+  - 7.4
 
 mysql:
   database: drupal
@@ -22,6 +23,9 @@ cache:
   directories:
   - "$HOME/.composer/cache"
   - "$HOME/.drush/cache"
+
+matrix:
+  fast_finish: true
 
 before_install:
 
@@ -49,7 +53,7 @@ install:
 script:
 
   # Install Drupal.
-  - vendor/bin/drush --root $WEBROOT site-install --verbose --yes --db-url="$DB_URL"
+  - vendor/bin/drush --root $WEBROOT site-install --verbose --yes --db-url="$DB_URL" minimal
 
   # Start a web server.
   - vendor/bin/drush --root $WEBROOT runserver $BASE_URL &
