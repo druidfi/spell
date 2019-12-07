@@ -10,18 +10,18 @@ php:
 
 mysql:
   database: drupal
-  username: drupal
+  username: root
   encoding: utf8
 
 env:
   global:
     - BASE_URL="http://127.0.0.1:8080"
-    - DB_URL=mysql://drupal:drupal@127.0.0.1/drupal
+    - DB_URL=mysql://root@127.0.0.1/drupal
     - WEBROOT=$TRAVIS_BUILD_DIR/public
     - DRUPAL_DB_NAME=drupal
     - DRUPAL_DB_HOST=127.0.0.1
-    - DRUPAL_DB_USER=drupal
-    - DRUPAL_DB_PASS=drupal
+    - DRUPAL_DB_USER=root
+    - DRUPAL_DB_PASS=
 
 cache:
   directories:
@@ -50,9 +50,6 @@ install:
   # Do Composer install.
   #- composer install --no-interaction
   - make build RUN_ON=host
-
-before_script:
-  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('drupal') WHERE user='drupal';\nFLUSH PRIVILEGES;\n" | mysql -u root
 
 script:
 
