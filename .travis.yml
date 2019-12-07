@@ -16,7 +16,7 @@ mysql:
 env:
   global:
     - BASE_URL="http://127.0.0.1:8080"
-    - DB_URL=mysql://root@127.0.0.1/drupal
+    - DB_URL=mysql://drupal:drupal@127.0.0.1/drupal
     - WEBROOT=$TRAVIS_BUILD_DIR/public
     - DRUPAL_DB_NAME=drupal
     - DRUPAL_DB_HOST=127.0.0.1
