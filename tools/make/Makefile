@@ -49,6 +49,11 @@ else
 	RUN_ON := host
 endif
 
+# CI systems should run on host
+ifeq (${CI},true)
+	RUN_ON := host
+endif
+
 PHONY += debug
 debug: ## Show debug information
 	@printf "${GREEN}Debug starts:${NO_COLOR}\n"
