@@ -756,6 +756,10 @@ $settings['entity_update_backup'] = TRUE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 
+$settings['trusted_host_patterns'] = [
+  '^.+\.docker\.sh$',
+];
+
 $databases['default']['default'] = array (
   'database' => 'drupal',
   'username' => 'drupal',
