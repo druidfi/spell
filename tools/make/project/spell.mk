@@ -11,5 +11,6 @@ endif
 	@rm -rf docs LICENSE.md README.md tools/make/project/spell.mk
 	@mv README.project.md README.md
 	@$(MAKE) self-update
+	@composer config --unset extra.drupal-core-project-message
 	@composer config --unset scripts.post-create-project-cmd
 	@git init && git add .

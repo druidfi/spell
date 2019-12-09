@@ -1,12 +1,12 @@
 # FAQ
 
-## How to access Amazee instances of this site?
+## How to access remote instances of a site?
 
-First access your local container and from there use drush to connect:
+First access your local app container and from there use `drush` to connect:
 
 ```
 $ make shell
-$ drush @amazeeio.master ssh
+$ drush @alias ssh
 ```
 
 ## How to connect to local database?
@@ -17,8 +17,11 @@ https://docs.amazee.io/local_docker_development/connect_to_mysql_from_external.h
 
 ## How are emails sent?
 
-Emails are sent with SendGrid SMTP configuration.
+Emails are sent with SendGrid SMTP configuration using either suitable container or SMTP module.
 
 ## Mailhog
 
-If you are looking for the email sent by you local visit http://mailhog.docker.amazee.io/
+Depending of the dev tools you can access Mailhog in:
+
+- https://mailhog.docker.sh/
+- http://mailhog.docker.amazee.io/
