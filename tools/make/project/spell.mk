@@ -13,4 +13,3 @@ endif
 	@$(MAKE) self-update
 	@composer config --unset scripts.post-create-project-cmd
 	@git init && git add .
-	@cd ${BASENAME}
