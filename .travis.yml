@@ -49,6 +49,9 @@ install:
 
 script:
 
+  # Remove default settings.php.
+  - rm -f $WEBROOT/sites/default/settings.php
+
   # Install Drupal.
   - vendor/bin/drush --root $WEBROOT site-install --verbose --yes --db-url="$DB_URL" minimal || travis_terminate 1;
 
