@@ -55,12 +55,6 @@
             "public/themes/contrib/{$name}": ["type:drupal-theme"],
             "public/themes/custom/{$name}": ["type:drupal-theme-custom"],
             "drush/{$name}": ["type:drupal-drush"]
-        },
-        "drupal-core-project-message": {
-            "post-create-project-cmd-message": [
-                "Thanks for installing this project.",
-                "Please visit our documentation here: https://github.com/druidfi/spell/blob/master/README.project.md"
-            ]
         }
     },
     "repositories": [
