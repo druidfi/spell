@@ -75,5 +75,4 @@ script:
   - make lint-php
 
   # Tear down
-  - make down
   - make clean
