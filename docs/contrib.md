@@ -1,6 +1,4 @@
-# Contrib modules included
-
-These recommended modules are included in the `composer.json`, but you can remove them if not needed.
+# Recommended contrib modules
 
 - [Admin Toolbar](https://www.drupal.org/project/admin_toolbar) - Improved Drupal Toolbar
 - [CDN](https://www.drupal.org/project/cdn) - Easy CDN integration
@@ -11,14 +9,13 @@ These recommended modules are included in the `composer.json`, but you can remov
 
 ## Add or remove modules
 
-First log into Drupal Docker container with:
+First log into app container with:
 
 ```
 $ make shell
-$ cd ..
 ```
 
-### Add a new module
+## Add a new module
 
 Require the new module (e.g. Paragraphs) with:
 
@@ -26,7 +23,19 @@ Require the new module (e.g. Paragraphs) with:
 $ composer require drupal/paragraphs
 ```
 
-### Remove a new module
+## Enable a new module
+
+```
+$ drush en paragraphs
+```
+
+## Update configuration
+
+```
+$ drush cex
+```
+
+## Remove a new module
 
 Remove the module (e.g. System status) with:
 

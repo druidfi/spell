@@ -2,9 +2,6 @@
 
 BUILD_TARGETS :=
 CLEAN_FOLDERS := node_modules
-CLI_SERVICE := cli
-CLI_SHELL := sh
-CLI_USER := root
 COMPOSER_BIN := $(shell which composer || echo no)
 COMPOSER_JSON_EXISTS := $(shell test -f composer.json && echo yes || echo no)
 DOCKER_COMPOSE_BIN := $(shell which docker-compose || echo no)
@@ -17,7 +14,7 @@ TEST_TARGETS := test-foobar
 UNAME_S := $(shell uname -s)
 # Shorten with https://git.io/ : https://raw.githubusercontent.com/druidfi/tools/master/update.sh
 UPDATE_SCRIPT_URL := https://git.io/fh771
-WEBROOT := public
+WEBROOT ?= public
 
 # Detect additional tooling
 AMAZEEIO_LEGACY := $(shell test -f .amazeeio.yml && echo yes || echo no)
@@ -52,6 +49,11 @@ else
 	RUN_ON := host
 endif
 
+# CI systems should run on host
+ifeq (${CI},true)
+	RUN_ON := host
+endif
+
 PHONY += debug
 debug: ## Show debug information
 	@printf "${GREEN}Debug starts:${NO_COLOR}\n"
@@ -61,6 +63,7 @@ debug: ## Show debug information
 	$(call dbg,CLI_SERVICE,${CLI_SERVICE})
 	$(call dbg,CLI_USER,${CLI_USER})
 	$(call dbg,CLI_SHELL,${CLI_SHELL})
+	$(call dbg,DOCKER_PROJECT_ROOT,${DOCKER_PROJECT_ROOT})
 	$(call dbg,DOCKER_COMPOSE_BIN,${DOCKER_COMPOSE_BIN})
 	$(call dbg,DOCKER_COMPOSE_YML_EXISTS,${DOCKER_COMPOSE_YML_EXISTS})
 	$(call dbg,ENV,${ENV})

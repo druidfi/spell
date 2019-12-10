@@ -2,20 +2,20 @@ ARTIFACT_INCLUDE_EXISTS := $(shell test -f conf/artifact/include && echo yes || 
 ARTIFACT_EXCLUDE_EXISTS := $(shell test -f conf/artifact/exclude && echo yes || echo no)
 ARTIFACT_CMD := tar -hczf artifact.tar.gz
 
+ifeq ($(ARTIFACT_EXCLUDE_EXISTS),yes)
+	ARTIFACT_CMD := ${ARTIFACT_CMD} --exclude-from=conf/artifact/exclude
+endif
+
 ifeq ($(ARTIFACT_INCLUDE_EXISTS),yes)
 	ARTIFACT_CMD := ${ARTIFACT_CMD} --files-from=conf/artifact/include
 else
 	ARTIFACT_CMD := ${ARTIFACT_CMD} *
 endif
 
-ifeq ($(ARTIFACT_EXCLUDE_EXISTS),yes)
-	ARTIFACT_CMD := ${ARTIFACT_CMD} --exclude-from=conf/artifact/exclude
-endif
-
 PHONY += artifact
 # This command can always be run on host
 artifact: RUN_ON := host
-artifact: build ## Make tar.gz package from the current build
+artifact: ## Make tar.gz package from the current build
 	$(call step,Create artifact (${RUN_ON})...)
 	@${ARTIFACT_CMD}
 

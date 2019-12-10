@@ -1,7 +1,5 @@
 # Quality assurance
 
-Log in to the container with `make shell`
-
 ## Available commands
 
 Run all tests and code style checks

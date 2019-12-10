@@ -11,7 +11,7 @@ codebase.
 ## Requirements
 
 - PHP and Composer
-- [Docker and Pygmy](https://github.com/druidfi/guidelines/blob/master/docs/local_dev_env.md)
+- [Docker and Stonehenge](https://github.com/druidfi/guidelines/blob/master/docs/local_dev_env.md)
 
 ## Create a new project
 
@@ -25,8 +25,8 @@ Or using Docker image:
 
 ```
 mkdir YOUR_PROJECT && cd YOUR_PROJECT && \
-docker run --rm -it --user=drupal -v $PWD:/var/www/drupal/public_html \
-    druidfi/docker-drupal:php71-basic \
+docker run --rm -it -v $PWD:/app \
+    druidfi/drupal:7.3-web \
     composer create-project druidfi/spell:dev-master . --no-interaction
 ```
 
@@ -46,18 +46,6 @@ Now your site can can be accessed from http://yoursite.fi.docker.amazee.io
 Git has been init in the directory `<project-path>` but you need to specify your remote before you can push.
 
 Also this readme has been replaced with [this one](README.project.md).
-
-## Developing Spell
-
-Testing create-project:
-
-```
-$ make test-master
-```
-
-This will basically do following command:
-
-`composer create-project druidfi/spell:dev-master /tmp/mysite/master --no-interaction`
 
 ## Other information
 
