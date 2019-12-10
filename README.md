@@ -3,10 +3,14 @@
 [![Build Status](https://travis-ci.org/druidfi/spell.svg?branch=master)](https://travis-ci.org/druidfi/spell)
 
 This is a skeleton repository which will create a new Drupal 8 project for you and setup Docker based development
-environment by Amazee.io.
+environment with Stonehenge.
 
-After the installation you'll have a directory with our template and with various tools to handle your Drupal 8
-codebase.
+## Includes
+
+- Drupal 8.8.x
+- Drush 10.x
+- Docker setup with app image and a database image for development
+- [druidfi/tools](https://github.com/druidfi/tools) included
 
 ## Requirements
 
@@ -18,13 +22,13 @@ codebase.
 If you have PHP and Composer installed on your host:
 
 ```
-$ composer create-project druidfi/spell:dev-master YOUR_PROJECT --no-interaction
+$ composer create-project druidfi/spell:dev-master yoursite --no-interaction
 ```
 
 Or using Docker image:
 
 ```
-mkdir YOUR_PROJECT && cd YOUR_PROJECT && \
+mkdir yoursite && cd yoursite && \
 docker run --rm -it -v $PWD:/app \
     druidfi/drupal:7.3-web \
     composer create-project druidfi/spell:dev-master . --no-interaction
@@ -35,17 +39,17 @@ docker run --rm -it -v $PWD:/app \
 Start the development environment, build development codebase and install empty site:
 
 ```
-$ cd YOUR_PROJECT
+$ cd yoursite
 $ make new
 ```
 
-Now your site can can be accessed from http://yoursite.fi.docker.amazee.io
+Now your site can can be accessed from https://yoursite.docker.sh
 
 ## Next steps
 
-Git has been init in the directory `<project-path>` but you need to specify your remote before you can push.
+Git has been init in the project but you need to specify your remote before you can push.
 
-Also this readme has been replaced with [this one](README.project.md).
+Also this README.md has been replaced with [this one](README.project.md).
 
 ## Other information
 
