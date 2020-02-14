@@ -40,10 +40,3 @@ This will log you inside the app container:
 ```
 $ make shell
 ```
-
-## Read more
-
-- [FAQ](https://github.com/druidfi/spell/blob/master/docs/faq.md)
-- [Project structure](https://github.com/druidfi/spell/blob/master/docs/structure.md)
-- [Quality assurance](https://github.com/druidfi/spell/blob/master/docs/qa.md)
-- [Recommended contrib modules](https://github.com/druidfi/spell/blob/master/docs/contrib.md)
