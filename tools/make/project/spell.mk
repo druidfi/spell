@@ -8,7 +8,7 @@ ifeq ($(UNAME_S),Darwin)
 else
 	@sed -i '/composer.lock/d' .gitignore
 endif
-	@rm -rf docs LICENSE.md README.md tools/make/project/spell.mk
+	@rm -rf .env-e docs LICENSE.md README.md tools/make/project/spell.mk
 	@mv README.project.md README.md
 	@$(MAKE) self-update
 	@composer config --unset scripts.post-create-project-cmd
