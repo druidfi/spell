@@ -15,8 +15,14 @@ mysql:
 
 env:
   global:
+    - DRUPAL_DB_HOST=127.0.0.1
+    - DRUPAL_DB_NAME=drupal
+    - DRUPAL_DB_USER=root
+    - DRUPAL_DB_PASS=
     - BASE_URL="http://127.0.0.1:8080"
-    - DB_URL=mysql://root@127.0.0.1/drupal
+    - DB_URL=mysql://$DRUPAL_DB_USER@$DRUPAL_DB_HOST/$DRUPAL_DB_NAME
+    - SIMPLETEST_BASE_URL=$BASE_URL
+    - SIMPLETEST_DB=$DB_URL
     - WEBROOT=$TRAVIS_BUILD_DIR/public
 
 cache:
@@ -43,8 +49,10 @@ install:
   # Create database.
   - mysql -e 'create database drupal;'
 
+  # Validate composer.json.
+  - composer validate
+
   # Do Composer install.
-  #- composer install --no-interaction
   - make build
 
 script:
