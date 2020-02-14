@@ -6,7 +6,7 @@ sudo: false
 php:
   - 7.2
   - 7.3
-#  - 7.4
+  - 7.4
 
 mysql:
   database: drupal
@@ -18,6 +18,8 @@ env:
     - BASE_URL="http://127.0.0.1:8080"
     - DB_URL=mysql://root@127.0.0.1/drupal
     - WEBROOT=$TRAVIS_BUILD_DIR/public
+    - SIMPLETEST_BASE_URL=http://127.0.0.1:8080
+    - SIMPLETEST_DB=mysql://root@127.0.0.1/drupal
 
 cache:
   directories:
@@ -44,10 +46,12 @@ install:
   - mysql -e 'create database drupal;'
 
   # Do Composer install.
-  #- composer install --no-interaction
   - make build
 
 script:
+
+  # Validate composer.json.
+  - composer validate
 
   # Remove default settings.php.
   - rm -f $WEBROOT/sites/default/settings.php
