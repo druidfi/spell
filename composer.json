@@ -14,17 +14,14 @@
     "prefer-stable": true,
     "require": {
         "cweagans/composer-patches": "^1.6.5",
+        "druidfi/omen": "^1",
         "drupal/core-composer-scaffold": "^8.8",
         "drupal/core-recommended": "^8.8",
-        "drush/drush": "^10.1",
+        "drush/drush": "^10.2",
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
         "drupal/core-dev": "^8.8.0"
-    },
-    "suggest": {
-        "druidfi/omen": "Detects basic configuration in known environments"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -43,9 +40,12 @@
                 "web-root": "./public"
             },
             "file-mapping": {
-                "[web-root]/.editorConfig": false
+                "[project-root]/.editorconfig": false,
+                "[web-root]/sites/default/default.services.yml": false,
+                "[web-root]/sites/default/default.settings.php": false
             }
         },
+        "enable-patching": true,
         "installer-paths": {
             "public/core": ["type:drupal-core"],
             "public/libraries/{$name}": ["type:drupal-library"],
@@ -66,16 +66,6 @@
     "scripts": {
         "post-create-project-cmd": [
             "make cast-spell"
-        ],
-        "fix": [
-            "phpcbf --colors --standard=Drupal --extensions=php,theme,module --ignore='*.css,*.md,node_modules' ./public/modules/custom ./public/themes/custom"
-        ],
-        "lint": [
-            "phpcs --colors --standard=Drupal --extensions=php,theme,module --ignore='*.css,*.md,node_modules' ./public/modules/custom ./public/themes/custom"
-        ],
-        "test": [
-            "phpunit -c phpunit.xml.dist --testsuite unit"
-        ],
-        "test-unit": "@test"
+        ]
     }
 }
