@@ -14,7 +14,7 @@
     "prefer-stable": true,
     "require": {
         "cweagans/composer-patches": "^1.6.5",
-        "druidfi/omen": "^1",
+        "druidfi/omen": "^0.1.0",
         "drupal/core-composer-scaffold": "^8.8",
         "drupal/core-recommended": "^8.8",
         "drush/drush": "^10.2",
