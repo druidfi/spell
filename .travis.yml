@@ -53,7 +53,7 @@ install:
   - composer validate
 
   # Do Composer install.
-  - make build
+  - COMPOSER_MEMORY_LIMIT=-1 make build
 
 script:
 
