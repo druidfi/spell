@@ -1,6 +1,8 @@
 language: php
-dist: trusty
+dist: xenial
 sudo: false
+services:
+  - mysql
 
 # Supported PHP versions to test with.
 php:
@@ -15,20 +17,16 @@ mysql:
 
 env:
   global:
-    - DRUPAL_DB_HOST=127.0.0.1
-    - DRUPAL_DB_NAME=drupal
-    - DRUPAL_DB_USER=root
-    - DRUPAL_DB_PASS=
     - BASE_URL="http://127.0.0.1:8080"
-    - DB_URL=mysql://$DRUPAL_DB_USER@$DRUPAL_DB_HOST/$DRUPAL_DB_NAME
-    - SIMPLETEST_BASE_URL=$BASE_URL
-    - SIMPLETEST_DB=$DB_URL
+    - DB_URL=mysql://root@127.0.0.1/drupal
     - WEBROOT=$TRAVIS_BUILD_DIR/public
+    - SIMPLETEST_BASE_URL=http://127.0.0.1:8080
+    - SIMPLETEST_DB=mysql://root@127.0.0.1/drupal
 
 cache:
   directories:
-  - "$HOME/.composer/cache"
-  - "$HOME/.drush/cache"
+    - "$HOME/.composer/cache"
+    - "$HOME/.drush/cache"
 
 before_install:
 
