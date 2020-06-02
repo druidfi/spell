@@ -6,9 +6,8 @@ services:
 
 # Supported PHP versions to test with.
 php:
-  - 7.2
   - 7.3
-#  - 7.4 < 7.4 does not have e.g. gd-extension and composer install will fail.
+  - 7.4
 
 mysql:
   database: drupal
