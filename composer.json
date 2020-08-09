@@ -1,6 +1,6 @@
 {
     "name": "druidfi/spell",
-    "description": "Spell to create a new Drupal 8 project",
+    "description": "Spell to create a new Drupal 9 project",
     "type": "project",
     "license": "MIT",
     "homepage": "https://github.com/druidfi/spell",
@@ -15,10 +15,10 @@
     "require": {
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.6.7",
-        "druidfi/omen": "^0.1.7",
+        "druidfi/omen": "^0.2.0",
         "drupal/core-composer-scaffold": "^9.0",
         "drupal/core-recommended": "^9.0",
-        "drush/drush": "^10.2",
+        "drush/drush": "^10.3",
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
