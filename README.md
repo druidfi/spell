@@ -33,7 +33,7 @@ Or using Docker image:
 
 ```
 mkdir yoursite && cd yoursite && \
-docker run --rm -it -v $PWD:/app \
+docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
     druidfi/drupal:7.3-web \
     composer create-project druidfi/spell:dev-master . --no-interaction
 ```
