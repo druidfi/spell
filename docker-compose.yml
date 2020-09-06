@@ -20,10 +20,12 @@ services:
       - internal
       - stonehenge-network
     labels:
-      traefik.enable: true
-      traefik.port: 8080
-      traefik.frontend.rule: "Host:${DRUPAL_HOSTNAME}"
-      traefik.frontend.redirect.entryPoint: https
+      - "traefik.enable=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app.entrypoints=https"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app.rule=Host(`${DRUPAL_HOSTNAME}`)"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app.tls=true"
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-app.loadbalancer.server.port=8080"
+      - "traefik.docker.network=stonehenge-network"
 
   db:
     container_name: "${COMPOSE_PROJECT_NAME}-db"
@@ -38,16 +40,20 @@ services:
   varnish:
     container_name: "${COMPOSE_PROJECT_NAME}-varnish"
     image: druidfi/varnish:6-drupal
+    environment:
+      VARNISH_BACKEND_HOST: "${COMPOSE_PROJECT_NAME}-app"
     depends_on:
       - app
     networks:
       - internal
       - stonehenge-network
     labels:
-      traefik.enable: true
-      traefik.port: 6081
-      traefik.frontend.rule: "Host:varnish-${DRUPAL_HOSTNAME}"
-      traefik.frontend.redirect.entryPoint: https
+      - "traefik.enable=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-varnish.entrypoints=https"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-varnish.rule=Host(`varnish-${DRUPAL_HOSTNAME}`)"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-varnish.tls=true"
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-varnish.loadbalancer.server.port=6081"
+      - "traefik.docker.network=stonehenge-network"
 
 networks:
   internal:
