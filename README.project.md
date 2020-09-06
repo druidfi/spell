@@ -7,7 +7,7 @@ Description of your project.
 Env | Branch | Drush alias | URL
 --- | ------ | ----------- | ---
 development | * | - | http://yoursite.docker.sh/
-production | master | @master | TBD
+production | main | @main | TBD
 
 ## Requirements
 
