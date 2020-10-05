@@ -21,6 +21,7 @@ env:
     - WEBROOT=$TRAVIS_BUILD_DIR/public
     - SIMPLETEST_BASE_URL=http://127.0.0.1:8080
     - SIMPLETEST_DB=mysql://root@127.0.0.1/drupal
+    - COMPOSER_MEMORY_LIMIT=-1
 
 cache:
   directories:
@@ -50,7 +51,7 @@ install:
   - composer validate
 
   # Do Composer install.
-  - COMPOSER_MEMORY_LIMIT=-1 make build
+  - make build
 
 script:
 
@@ -70,8 +71,8 @@ script:
   - vendor/bin/drush --root $WEBROOT status
 
   # Install a module to check functionality.
-  - composer require drupal/system_status --no-scripts
-  - vendor/bin/drush --root $WEBROOT en --yes system_status
+  - composer require drupal/metatag --no-scripts
+  - vendor/bin/drush --root $WEBROOT en --yes metatag
 
   # Run lints & tests.
   - make debug
