@@ -1,6 +1,6 @@
 # druidfi/spell
 
-[![Build Status](https://travis-ci.org/druidfi/spell.svg?branch=master)](https://travis-ci.org/druidfi/spell)
+![Drupal](https://github.com/druidfi/spell/workflows/Drupal/badge.svg)
 
 This is a skeleton repository which will create a new Drupal 8 project for you and setup Docker based development
 environment with Stonehenge.
