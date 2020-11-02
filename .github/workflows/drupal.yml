@@ -65,3 +65,9 @@ jobs:
         env:
           DRUPAL_DB_HOST: 127.0.0.1
           DRUPAL_DB_PORT: ${{ job.services.mysql.ports[3306] }}
+
+      - name: Operate on Drupal
+        run: |
+          vendor/bin/drush --root public status
+          composer require drupal/metatag
+          vendor/bin/drush --root public en --yes metatag
