@@ -14,7 +14,16 @@ jobs:
         php-versions: ['7.3', '7.4']
 
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Install dependencies
-        uses: php-actions/composer@v3
+
+      - name: Setup PHP with composer v2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '${{ matrix.php-versions }}'
+          tools: composer:v2
+
+      - name: Install Composer dependencies
+          run: |
+            composer install --prefer-dist --optimize-autoloader
