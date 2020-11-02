@@ -25,5 +25,5 @@ jobs:
           tools: composer:v2
 
       - name: Install Composer dependencies
-          run: |
-            composer install --prefer-dist --optimize-autoloader
+        run: |
+          composer install --prefer-dist --optimize-autoloader
