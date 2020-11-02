@@ -29,7 +29,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '${{ matrix.php-versions }}'
-          tools: composer:v2, phpcs
+          tools: composer:v2
 
       - name: Validate composer.json
         run: composer validate
@@ -52,10 +52,10 @@ jobs:
 
       - name: Lint
         run: |
-          phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer
-          phpcs -i
-          phpcs --standard=Drupal,DrupalPractice -n public/modules/custom
-          phpcs --standard=Drupal,DrupalPractice -n public/themes/custom
+          vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer
+          vendor/bin/phpcs -i
+          vendor/bin/phpcs --standard=Drupal,DrupalPractice -n public/modules/custom
+          vendor/bin/phpcs --standard=Drupal,DrupalPractice -n public/themes/custom
 
       - name: Run PHPUnit tests
         run: vendor/bin/phpunit --testsuite unit,kernel,functional
