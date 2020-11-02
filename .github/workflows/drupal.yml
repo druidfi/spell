@@ -13,6 +13,12 @@ jobs:
       matrix:
         php-versions: ['7.3', '7.4']
 
+    services:
+      db:
+        image: druidfi/db:mysql5.7-drupal
+        ports:
+          - 3306/tcp
+
     steps:
 
       - name: Checkout code
@@ -24,6 +30,16 @@ jobs:
           php-version: '${{ matrix.php-versions }}'
           tools: composer:v2
 
+      - name: Validate composer.json
+        run: composer validate
+
       - name: Install Composer dependencies
         run: |
-          composer install --prefer-dist --optimize-autoloader
+          composer install --prefer-dist --optimize-autoloader --no-progress
+
+      #- name: Remove default settings.php
+      #  run: rm -f public/sites/default/settings.php
+
+      - name: Install Drupal
+        run: |
+          vendor/bin/drush --root public site-install --verbose --yes minimal
