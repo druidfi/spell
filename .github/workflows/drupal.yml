@@ -68,6 +68,6 @@ jobs:
 
       - name: Operate on Drupal
         run: |
-          vendor/bin/drush --root public status
-          composer require drupal/metatag
-          vendor/bin/drush --root public en --yes metatag
+          vendor/bin/drush status
+          composer require --no-progress drupal/metatag
+          vendor/bin/drush en --yes metatag
