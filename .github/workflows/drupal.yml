@@ -34,9 +34,6 @@ jobs:
       - name: Validate composer.json
         run: composer validate
 
-      - name: Lint
-        run: phpcs -n .
-
       - name: Get composer cache directory
         id: composercache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
@@ -52,6 +49,11 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --optimize-autoloader --no-progress
+
+      - name: Lint
+        run: |
+          phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer
+          phpcs -n .
 
       - name: Run PHPUnit tests
         run: vendor/bin/phpunit --testsuite unit,kernel,functional
