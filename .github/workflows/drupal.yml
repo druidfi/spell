@@ -53,7 +53,9 @@ jobs:
       - name: Lint
         run: |
           phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer
-          phpcs -n .
+          phpcs -i
+          phpcs --standard=Drupal,DrupalPractice -n public/modules/custom
+          phpcs --standard=Drupal,DrupalPractice -n public/themes/custom
 
       - name: Run PHPUnit tests
         run: vendor/bin/phpunit --testsuite unit,kernel,functional
