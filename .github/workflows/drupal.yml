@@ -3,8 +3,11 @@ name: Drupal
 on: [push]
 
 env:
-  DRUPAL_DB_HOST: 127.0.0.1
+  DRUPAL_DB_HOST: db
   DRUPAL_DB_PORT: 3306
+  DRUPAL_INSTALL_PROFILE: minimal
+  SIMPLETEST_DB: "mysql://drupal:drupal@db:3306/drupal"
+  SIMPLETEST_BASE_URL: "http://127.0.0.1:8080"
 
 jobs:
 
@@ -18,7 +21,7 @@ jobs:
         php-versions: ['7.3', '7.4']
 
     services:
-      mysql:
+      db:
         image: druidfi/db:mysql5.7-drupal
         ports:
           - 3306:3306
@@ -64,7 +67,7 @@ jobs:
           vendor/bin/phpcs --standard=Drupal,DrupalPractice -n public/themes/custom
 
       - name: Install Drupal
-        run: vendor/bin/drush site-install --verbose --yes minimal
+        run: vendor/bin/drush site-install --verbose --yes $DRUPAL_INSTALL_PROFILE
 
       - name: Operate on Drupal
         run: |
@@ -72,5 +75,10 @@ jobs:
           composer require --no-progress drupal/metatag
           vendor/bin/drush en --yes metatag
 
+      - name: Run web server with Drush
+        run: |
+          vendor/bin/drush runserver $SIMPLETEST_BASE_URL > /dev/null 2>&1 &
+          chromedriver --port=4444 > /dev/null 2>&1 &
+
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --verbose
+        run: vendor/bin/phpunit -c phpunit.xml.dist --verbose
