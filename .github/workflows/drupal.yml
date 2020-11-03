@@ -1,6 +1,6 @@
 name: Drupal
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
 
@@ -24,6 +24,8 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
 
       - name: Setup PHP with composer v2
         uses: shivammathur/setup-php@v2
@@ -52,13 +54,9 @@ jobs:
 
       - name: Lint
         run: |
-          vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer
           vendor/bin/phpcs -i
           vendor/bin/phpcs --standard=Drupal,DrupalPractice -n public/modules/custom
           vendor/bin/phpcs --standard=Drupal,DrupalPractice -n public/themes/custom
-
-      - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --testsuite unit,kernel,functional
 
       - name: Install Drupal
         run: |
@@ -69,3 +67,6 @@ jobs:
         env:
           DRUPAL_DB_HOST: 127.0.0.1
           DRUPAL_DB_PORT: ${{ job.services.mysql.ports[3306] }}
+
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit --testsuite unit,kernel,functional
