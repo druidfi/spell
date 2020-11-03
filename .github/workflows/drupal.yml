@@ -70,4 +70,4 @@ jobs:
           DRUPAL_DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --testsuite unit,kernel,functional
+        run: vendor/bin/phpunit --verbose
