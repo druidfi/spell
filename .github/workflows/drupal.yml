@@ -4,7 +4,7 @@ on: [push]
 
 env:
   DRUPAL_DB_HOST: 127.0.0.1
-  DRUPAL_DB_PORT: "${{ job.services.mysql.ports[3306] }}"
+  DRUPAL_DB_PORT: 3306
 
 jobs:
 
@@ -21,7 +21,7 @@ jobs:
       mysql:
         image: druidfi/db:mysql5.7-drupal
         ports:
-          - 3306/tcp
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
