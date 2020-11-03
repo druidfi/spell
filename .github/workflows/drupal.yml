@@ -22,6 +22,7 @@ jobs:
 
     services:
       db:
+        # See https://hub.docker.com/r/druidfi/db
         image: druidfi/db:mysql5.7-drupal
         ports:
           - 3306:3306
