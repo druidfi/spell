@@ -1,0 +1,85 @@
+name: Drupal
+
+on: [push]
+
+env:
+  DRUPAL_DB_HOST: 127.0.0.1
+  DRUPAL_DB_PORT: 3306
+  DRUPAL_INSTALL_PROFILE: minimal
+  SIMPLETEST_DB: mysql://drupal:drupal@127.0.0.1:3306/drupal
+  SIMPLETEST_BASE_URL: http://127.0.0.1:8080
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['7.3', '7.4']
+
+    services:
+      db:
+        # See https://hub.docker.com/r/druidfi/db
+        image: druidfi/db:mysql5.7-drupal
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Setup PHP with composer v2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '${{ matrix.php-versions }}'
+          tools: composer:v2
+
+      - name: Validate composer.json
+        run: composer validate
+
+      - name: Get composer cache directory
+        id: composercache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composercache.outputs.dir }}
+          # Use composer.json for key, if composer.lock is not committed.
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          #key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --optimize-autoloader --no-progress
+
+      - name: Lint
+        run: |
+          vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer
+          vendor/bin/phpcs -i
+          vendor/bin/phpcs --standard=Drupal,DrupalPractice -n public/modules/custom
+          vendor/bin/phpcs --standard=Drupal,DrupalPractice -n public/themes/custom
+
+      - name: Install Drupal
+        run: vendor/bin/drush site-install --verbose --yes $DRUPAL_INSTALL_PROFILE
+
+      - name: Operate on Drupal
+        run: |
+          vendor/bin/drush status
+          composer require --no-progress drupal/metatag
+          vendor/bin/drush en --yes metatag
+
+      - name: Run web server with Drush
+        run: |
+          vendor/bin/drush runserver $SIMPLETEST_BASE_URL > /dev/null 2>&1 &
+          chromedriver --port=4444 > /dev/null 2>&1 &
+
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit -c phpunit.xml.dist --verbose

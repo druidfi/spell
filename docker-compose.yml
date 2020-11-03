@@ -13,12 +13,10 @@ services:
       APP_ENV: "${APP_ENV:-dev}"
       DRUPAL_ROUTES: "https://varnish-${DRUPAL_HOSTNAME}"
       DRUSH_OPTIONS_URI: "https://${DRUPAL_HOSTNAME}"
+      PHP_SENDMAIL_PATH: "/usr/sbin/sendmail -S stonehenge-mailhog:1025"
       #XDEBUG_ENABLE: "true"
       SIMPLETEST_BASE_URL: "http://app:8080"
       SIMPLETEST_DB: "mysql://drupal:drupal@db:3306/drupal"
-    networks:
-      - internal
-      - stonehenge-network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app.entrypoints=https"
@@ -26,6 +24,9 @@ services:
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app.tls=true"
       - "traefik.http.services.${COMPOSE_PROJECT_NAME}-app.loadbalancer.server.port=8080"
       - "traefik.docker.network=stonehenge-network"
+    networks:
+      - internal
+      - stonehenge-network
 
   db:
     container_name: "${COMPOSE_PROJECT_NAME}-db"
@@ -44,9 +45,6 @@ services:
       VARNISH_BACKEND_HOST: "${COMPOSE_PROJECT_NAME}-app"
     depends_on:
       - app
-    networks:
-      - internal
-      - stonehenge-network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-varnish.entrypoints=https"
@@ -54,6 +52,9 @@ services:
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-varnish.tls=true"
       - "traefik.http.services.${COMPOSE_PROJECT_NAME}-varnish.loadbalancer.server.port=6081"
       - "traefik.docker.network=stonehenge-network"
+    networks:
+      - internal
+      - stonehenge-network
 
 networks:
   internal:
