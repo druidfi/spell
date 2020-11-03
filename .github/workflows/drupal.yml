@@ -4,7 +4,7 @@ on: [push]
 
 env:
   DRUPAL_DB_HOST: 127.0.0.1
-  DRUPAL_DB_PORT: ${{ job.services.mysql.ports[3306] }}
+  DRUPAL_DB_PORT: "${{ job.services.mysql.ports[3306] }}"
 
 jobs:
 
