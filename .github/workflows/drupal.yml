@@ -2,6 +2,10 @@ name: Drupal
 
 on: [push]
 
+env:
+  DRUPAL_DB_HOST: 127.0.0.1
+  DRUPAL_DB_PORT: ${{ job.services.mysql.ports[3306] }}
+
 jobs:
 
   build:
@@ -60,14 +64,13 @@ jobs:
           vendor/bin/phpcs --standard=Drupal,DrupalPractice -n public/themes/custom
 
       - name: Install Drupal
+        run: vendor/bin/drush site-install --verbose --yes minimal
+
+      - name: Operate on Drupal
         run: |
-          vendor/bin/drush site-install --verbose --yes minimal
           vendor/bin/drush status
           composer require --no-progress drupal/metatag
           vendor/bin/drush en --yes metatag
-        env:
-          DRUPAL_DB_HOST: 127.0.0.1
-          DRUPAL_DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
       - name: Run PHPUnit tests
         run: vendor/bin/phpunit --verbose
