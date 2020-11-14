@@ -1,6 +1,10 @@
 name: Drupal
 
-on: [push]
+on:
+  push:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 0 * * *'
 
 env:
   DRUPAL_DB_HOST: 127.0.0.1
