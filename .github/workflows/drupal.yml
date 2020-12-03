@@ -86,4 +86,12 @@ jobs:
           chromedriver --port=4444 > /dev/null 2>&1 &
 
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit -c phpunit.xml.dist --verbose
+        run: |
+          PHPUNIT_TEST_RESULT=$(vendor/bin/phpunit -c /srv/http/patches/spell/phpunit.xml.dist --testdox)" >> $GITHUB_ENV $(vendor/bin/phpunit -c phpunit.xml.dist --verbose --testdox)
+          echo $PHPUNIT_TEST_RESULT
+          echo $PHPUNIT_TEST_RESULT | grep -q "Unit test"
+          echo $PHPUNIT_TEST_RESULT | grep -q "Kernel test"
+          echo $PHPUNIT_TEST_RESULT | grep -q "Functional test"
+          echo $PHPUNIT_TEST_RESULT | grep -q "Javascript test"
+
+
