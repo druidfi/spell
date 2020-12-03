@@ -87,11 +87,10 @@ jobs:
 
       - name: Run PHPUnit tests
         run: |
-          PHPUNIT_TEST_RESULT=$(vendor/bin/phpunit -c /srv/http/patches/spell/phpunit.xml.dist --testdox)
-          echo $PHPUNIT_TEST_RESULT
-          echo $PHPUNIT_TEST_RESULT | grep -q "Unit test"
-          echo $PHPUNIT_TEST_RESULT | grep -q "Kernel test"
-          echo $PHPUNIT_TEST_RESULT | grep -q "Functional test"
-          echo $PHPUNIT_TEST_RESULT | grep -q "Javascript test"
+          set -o pipefail; vendor/bin/phpunit -c /srv/http/patches/spell/phpunit.xml.dist --testdox | tee phpunit-result.txt
+          cat phpunit-result.txt | grep -q "Unit test"
+          cat phpunit-result.txt | grep -q "Kernel test"
+          cat phpunit-result.txt | grep -q "Functional test"
+          cat phpunit-result.txt | grep -q "Javascript test"
 
 
