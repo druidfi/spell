@@ -87,7 +87,7 @@ jobs:
 
       - name: Run PHPUnit tests
         run: |
-          set -o pipefail; vendor/bin/phpunit -c phpunit.xml.dist --testdox | tee phpunit-result.txt
+          set -o pipefail; vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml.dist --testdox | tee phpunit-result.txt
           cat phpunit-result.txt | grep -q "Unit test"
           cat phpunit-result.txt | grep -q "Kernel test"
           cat phpunit-result.txt | grep -q "Functional test"
