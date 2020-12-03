@@ -83,7 +83,7 @@ jobs:
       - name: Run web server with Drush
         run: |
           vendor/bin/drush runserver $SIMPLETEST_BASE_URL > /dev/null 2>&1 &
-          chromedriver --port=4444 > /dev/null 2>&1 &
+          chromedriver > /dev/null 2>&1 &
 
       - name: Run PHPUnit tests
         run: |
