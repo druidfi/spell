@@ -26,7 +26,7 @@ environment with Stonehenge.
 If you have PHP and Composer installed on your host (recommended):
 
 ```
-$ composer create-project druidfi/spell:dev-master yoursite --no-interaction
+$ composer create-project druidfi/spell:dev-main yoursite --no-interaction
 ```
 
 Or using Docker image:
@@ -34,8 +34,8 @@ Or using Docker image:
 ```
 mkdir yoursite && cd yoursite && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
-    druidfi/drupal:7.3-web \
-    composer create-project druidfi/spell:dev-master . --no-interaction
+    druidfi/drupal:7.4-web \
+    composer create-project druidfi/spell:dev-main . --no-interaction
 ```
 
 ### 2. using GitHub template
