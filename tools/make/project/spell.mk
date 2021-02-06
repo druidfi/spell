@@ -12,4 +12,4 @@ endif
 	@mv README.project.md README.md
 	@$(MAKE) self-update
 	@composer config --unset scripts.post-create-project-cmd
-	@git init && git add .
+	@git init --initial-branch=main && git add .
