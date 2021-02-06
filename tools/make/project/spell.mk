@@ -1,7 +1,7 @@
 PHONY += cast-spell
 cast-spell: BASENAME := $(shell basename $(CURDIR))
 cast-spell: ## Init Spell project
-	$(call colorecho, "\nInit Spell project...")
+	$(call step,Init Spell project...)
 	@sed -i -e 's|mysite|'"${BASENAME}"'|g' .env
 ifeq ($(UNAME_S),Darwin)
 	@sed -i '' '/composer.lock/d' .gitignore
