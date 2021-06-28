@@ -7,7 +7,7 @@ environment with Stonehenge.
 
 ## Includes
 
-- Drupal 9.0.x
+- Drupal 9.2.x
 - Drush 10.x
 - Docker setup for development, see [docker-compose.yml](docker-compose.yml)
 - [druidfi/tools](https://github.com/druidfi/tools)
@@ -66,4 +66,4 @@ You can run `make help` to list all available commands for you.
 
 ## Other information
 
-This project is found from the Packagist: https://packagist.org/packages/druidfi/spell
+This project can be found from the Packagist: https://packagist.org/packages/druidfi/spell
