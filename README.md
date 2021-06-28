@@ -2,7 +2,7 @@
 
 ![Drupal](https://github.com/druidfi/spell/workflows/Drupal/badge.svg)
 
-This is a skeleton repository which will create a new Drupal 8 project for you and setup Docker based development
+This is a skeleton repository which will create a new Drupal 9 project for you and setup Docker based development
 environment with Stonehenge.
 
 ## Includes
@@ -54,7 +54,7 @@ Start the development environment, build development codebase and install empty 
 $ make new
 ```
 
-Now your site can can be accessed from https://yoursite.docker.sh
+Now your site can can be accessed from https://yoursite.docker.so
 
 ## Next steps
 
