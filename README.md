@@ -11,9 +11,10 @@ environment with Stonehenge.
 - Drush 10.x
 - Docker setup for development, see [docker-compose.yml](docker-compose.yml)
 - [druidfi/tools](https://github.com/druidfi/tools)
-- Web root is `/public`
-- Configuration is in `/conf/cmi`
-- Custom modules are created in `/public/modules/custom`
+- Web root is `./public`
+- Configuration is in `./conf/cmi`
+- Custom modules can be created in `./public/modules/custom`
+
 ## Requirements
 
 - PHP and Composer
@@ -26,7 +27,7 @@ environment with Stonehenge.
 If you have PHP and Composer installed on your host (recommended):
 
 ```
-$ composer create-project druidfi/spell:dev-main yoursite --no-interaction
+composer create-project druidfi/spell:dev-main yoursite --no-interaction
 ```
 
 Or using Docker image:
@@ -51,14 +52,14 @@ Now you need to have Stonehenge up & running.
 Start the development environment, build development codebase and install empty site with minimal profile:
 
 ```
-$ make new
+make new
 ```
 
 Now your site can can be accessed from https://yoursite.docker.so
 
 ## Next steps
 
-Git has been init in the project but you need to specify your remote before you can push.
+Git has been init in the project, but you need to specify your remote before you can push.
 
 Also this README.md has been replaced with [this one](README.project.md).
 
