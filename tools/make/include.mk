@@ -30,3 +30,5 @@ PACKAGE_JSON_EXISTS := $(shell test -f $(PACKAGE_JSON_PATH)/package.json && echo
 ifeq ($(PACKAGE_JSON_EXISTS),yes)
 include $(DRUIDFI_TOOLS_MAKE_DIR)javascript.mk
 endif
+
+include $(DRUIDFI_TOOLS_MAKE_DIR)druid-cli.mk
