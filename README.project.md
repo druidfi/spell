@@ -1,4 +1,4 @@
-# Your Drupal 8 project
+# Your Drupal 9 project
 
 Description of your project.
 
@@ -7,6 +7,7 @@ Description of your project.
 Env | Branch | Drush alias | URL
 --- | ------ | ----------- | ---
 development | * | - | http://yoursite.docker.so/
+testing | dev | @dev | TBD
 production | main | @main | TBD
 
 ## Requirements
@@ -22,13 +23,13 @@ You need to have these applications installed to operate on all environments:
 For the first time (new project):
 
 ```
-$ make new
+make new
 ```
 
 And following times to create and start the environment:
 
 ```
-$ make fresh
+make fresh
 ```
 
 NOTE: Change these according of the state of your project.
@@ -38,5 +39,5 @@ NOTE: Change these according of the state of your project.
 This will log you inside the app container:
 
 ```
-$ make shell
+make shell
 ```
