@@ -16,7 +16,7 @@
         "composer-runtime-api": "^2",
         "composer/installers": "^2.0",
         "cweagans/composer-patches": "^1.7",
-        "druidfi/omen": "^0.3.0",
+        "druidfi/omen": "^0.4.0",
         "drupal/core-composer-scaffold": "^9.2",
         "drupal/core-recommended": "^9.2",
         "drush/drush": "^10.6"
