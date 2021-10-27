@@ -2,7 +2,7 @@
 
 ![Drupal](https://github.com/druidfi/spell/workflows/Drupal/badge.svg)
 
-This is a skeleton repository which will create a new Drupal 9 project for you and setup Docker based development
+This is a skeleton repository which will create a new Drupal project for you and setup Docker based development
 environment with Stonehenge.
 
 ## Includes
@@ -35,7 +35,7 @@ Or using Docker image:
 ```
 mkdir yoursite && cd yoursite && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
-    druidfi/drupal:7.4-web \
+    druidfi/drupal-web:php-7.4 \
     composer create-project druidfi/spell:dev-main . --no-interaction
 ```
 

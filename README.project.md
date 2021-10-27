@@ -1,4 +1,4 @@
-# Your Drupal 9 project
+# Your Drupal project
 
 Description of your project.
 
