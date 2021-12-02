@@ -7,7 +7,7 @@ YELLOW=\033[0;33m
 
 PHONY += help
 help: ## List all make commands
-	$(call step,Available make commands:)
+	$(call step,Available make commands:\n)
 	@cat $(MAKEFILE_LIST) | grep -e "^[a-zA-Z_\-]*: *.*## *" | awk 'BEGIN {FS = ":.*?## "}; {printf "${CYAN}%-30s${NO_COLOR} %s\n", $$1, $$2}' | sort
 
 define dbg
@@ -37,4 +37,8 @@ endef
 define copy
 	$(call output,Copy $(1) >> $(2))
 	@cp $(1) $(2)
+endef
+
+define run
+	@${1} && printf "${2}\n" || printf "${RED}${3}${NO_COLOR}\n"
 endef
