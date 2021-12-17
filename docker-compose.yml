@@ -24,6 +24,8 @@ services:
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app.tls=true"
       - "traefik.http.services.${COMPOSE_PROJECT_NAME}-app.loadbalancer.server.port=8080"
       - "traefik.docker.network=stonehenge-network"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - internal
       - stonehenge-network
