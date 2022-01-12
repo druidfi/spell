@@ -2,33 +2,43 @@ DRUPAL_CONF_EXISTS := $(shell test -f conf/cmi/core.extension.yml && echo yes ||
 DRUPAL_FRESH_TARGETS := up build sync post-install
 DRUPAL_NEW_TARGETS := up build drush-si drush-uli
 ifeq ($(DRUPAL_VERSION),7)
-DRUPAL_POST_INSTALL_TARGETS := drush-updb drush-cr drush-uli
+DRUPAL_POST_INSTALL_TARGETS := drush-updb drush-cr
+DRUPAL_ENABLE_MODULES ?= no
 else
-DRUPAL_POST_INSTALL_TARGETS := drush-deploy drush-uli
+DRUPAL_POST_INSTALL_TARGETS := drush-deploy
 CLEAN_FOLDERS += ${WEBROOT}/core
 CLEAN_FOLDERS += ${WEBROOT}/libraries
 CLEAN_FOLDERS += ${WEBROOT}/modules/contrib
-CLEAN_FOLDERS += ${WEBROOT}/profiles
+CLEAN_FOLDERS += ${WEBROOT}/profiles/contrib
 CLEAN_FOLDERS += ${WEBROOT}/themes/contrib
+DRUPAL_ENABLE_MODULES ?= no
 endif
 DRUPAL_PROFILE ?= minimal
 DRUPAL_SYNC_FILES ?= yes
 DRUPAL_SYNC_SOURCE ?= production
 DRUPAL_VERSION ?= 8
+
 DRUSH_RSYNC_MODE ?= Pakzu
 DRUSH_RSYNC_OPTS ?=  -- --omit-dir-times --no-perms --no-group --no-owner --chmod=ugo=rwX
 DRUSH_RSYNC_EXCLUDE ?= css:ctools:js:php:tmp:tmp_php
+
 SYNC_TARGETS += drush-sync
+
+PHPCS_EXTS := inc,php,module,install,profile,theme
 LINT_PATHS_JS += ./$(WEBROOT)/modules/custom/*/js
 LINT_PATHS_JS += ./$(WEBROOT)/themes/custom/*/js
-LINT_PATHS_PHP += -v $(CURDIR)/drush:/app/drush:rw,consistent
-LINT_PATHS_PHP += -v $(CURDIR)/$(WEBROOT)/modules/custom:/app/$(WEBROOT)/modules/custom:rw,consistent
-LINT_PATHS_PHP += -v $(CURDIR)/$(WEBROOT)/themes/custom:/app/$(WEBROOT)/themes/custom:rw,consistent
+LINT_PATHS_PHP += drush
+LINT_PATHS_PHP += $(WEBROOT)/modules/custom
+LINT_PATHS_PHP += $(WEBROOT)/themes/custom
 LINT_PHP_TARGETS += lint-drupal
 FIX_TARGETS += fix-drupal
 
 ifeq ($(GH_DUMP_ARTIFACT),yes)
 	DRUPAL_FRESH_TARGETS := gh-download-dump $(DRUPAL_FRESH_TARGETS)
+endif
+
+ifneq ($(DRUPAL_ENABLE_MODULES),no)
+	DRUPAL_POST_INSTALL_TARGETS += drush-enable-modules
 endif
 
 PHONY += drupal-update
@@ -71,12 +81,13 @@ drush-status: ## Show Drupal status information
 	$(call drush,status)
 
 PHONY += drush-uli
+drush-uli: DRUPAL_UID ?=
 drush-uli: ## Get login link
 	$(call step,Login to your site with:\n)
 ifeq ($(DRUPAL_VERSION),7)
 	$(call drush,uli)
 else
-	$(call drush,uli admin/reports/status)
+	$(call drush,uli$(if $(DRUPAL_UID), --uid=$(DRUPAL_UID),) admin/reports/status)
 endif
 
 PHONY += drush-si
@@ -108,7 +119,16 @@ new: ## Create a new empty Drupal installation from configuration
 
 PHONY += post-install
 post-install: ## Run post-install Drush actions
-	@$(MAKE) $(DRUPAL_POST_INSTALL_TARGETS)
+	@$(MAKE) $(DRUPAL_POST_INSTALL_TARGETS) drush-uli
+
+PHONY += drush-enable-modules
+drush-enable-modules: ## Enable Drupal modules
+	$(call step,Enable Drupal modules...)
+ifneq ($(DRUPAL_ENABLE_MODULES),no)
+	$(call drush,en -y $(subst ",,$(DRUPAL_ENABLE_MODULES)))
+else
+	$(call sub_step,No modules to enable)
+endif
 
 PHONY += drush-sync
 drush-sync: drush-sync-db drush-sync-files ## Sync database and files
@@ -150,16 +170,16 @@ drush-download-dump: ## Download database dump to dump.sql
 	$(call drush,-Dssh.tty=0 @$(DRUPAL_SYNC_SOURCE) sql-dump --structure-tables-key=common > ${DOCKER_PROJECT_ROOT}/$(DUMP_SQL_FILENAME))
 
 PHONY += fix-drupal
-fix-drupal: VOLUMES := $(subst $(space),,$(LINT_PATHS_PHP))
+fix-drupal: PATHS := $(subst $(space),,$(LINT_PATHS_PHP))
 fix-drupal: ## Fix Drupal code style
-	$(call step,Fix Drupal code style...)
-	@docker run --rm -it $(VOLUMES) druidfi/qa:php-$(call get_php_version) bash -c "phpcbf --runtime-set drupal_core_version $(DRUPAL_VERSION) ."
+	$(call step,Fix Drupal code style with phpcbf...\n)
+	$(call cs,phpcbf,$(PATHS))
 
 PHONY += lint-drupal
-lint-drupal: VOLUMES := $(subst $(space),,$(LINT_PATHS_PHP))
+lint-drupal: PATHS := $(subst $(space),,$(LINT_PATHS_PHP))
 lint-drupal: ## Lint Drupal code style
-	$(call step,Lint Drupal code style with...)
-	@docker run --rm -it $(VOLUMES) druidfi/qa:php-$(call get_php_version) bash -c "phpcs --runtime-set drupal_core_version $(DRUPAL_VERSION) ."
+	$(call step,Lint Drupal code style with phpcs...\n)
+	$(call cs,phpcs,$(PATHS))
 
 PHONY += mmfix
 mmfix: MODULE := MISSING_MODULE
