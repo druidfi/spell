@@ -6,6 +6,7 @@ on:
     branches:
       # Push events on main branch
       - main
+      - php8-drupal93-drush11
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '0 0 * * *'
