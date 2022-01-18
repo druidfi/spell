@@ -6,7 +6,6 @@ on:
     branches:
       # Push events on main branch
       - main
-      - php8-drupal93-drush11
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '0 0 * * *'
@@ -84,8 +83,6 @@ jobs:
           vendor/bin/drush status
           composer require --no-progress drupal/metatag
           vendor/bin/drush en --yes metatag
-
-      - uses: nanasess/setup-chromedriver@v1
 
       - name: Run web server with Drush
         run: |
