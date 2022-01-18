@@ -84,10 +84,12 @@ jobs:
           composer require --no-progress drupal/metatag
           vendor/bin/drush en --yes metatag
 
+      - uses: nanasess/setup-chromedriver@v1
+
       - name: Run web server with Drush
         run: |
           vendor/bin/drush runserver $SIMPLETEST_BASE_URL > /dev/null 2>&1 &
-          chromedriver --port=4444 > /dev/null 2>&1 &
+          chromedriver --port=4444 &
 
       - name: Run PHPUnit tests
         run: |
