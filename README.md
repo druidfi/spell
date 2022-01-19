@@ -65,6 +65,21 @@ Also this README.md has been replaced with [this one](README.project.md).
 
 You can run `make help` to list all available commands for you.
 
+## Running tests on Spell when developing
+
+On macOS you need first to install Chromedriver and allow it to execute:
+
+```
+brew install chromedriver
+xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver
+```
+
+Then run the same test scenario as in Github Actions:
+
+```
+make test
+```
+
 ## Other information
 
 This project can be found from the Packagist: https://packagist.org/packages/druidfi/spell
