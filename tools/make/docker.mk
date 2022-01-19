@@ -1,7 +1,7 @@
 CLI_SERVICE := cli
 CLI_SHELL := sh
 CLI_USER := root
-DOCKER_COMPOSE := docker compose
+DOCKER_COMPOSE := docker-compose
 DOCKER_COMPOSE_EXEC ?= $(DOCKER_COMPOSE) exec
 DOCKER_PROJECT_ROOT ?= /app
 DOCKER_WARNING_INSIDE := You are inside the Docker container!
@@ -12,7 +12,7 @@ config: ## Show docker-compose config
 
 PHONY += down
 down: ## Tear down the environment
-	$(call docker_compose,down -v --remove-orphans,Tear down the environment...)
+	$(call docker_compose,down -v --remove-orphans --rmi local,Tear down the environment...)
 
 PHONY += ps
 ps: ## Show docker-compose ps
@@ -24,7 +24,7 @@ stop: ## Stop the environment
 
 PHONY += up
 up: ## Launch the environment
-	$(call docker_compose,up -d --remove-orphans,Start up the container(s)...)
+	$(call docker_compose,up -d --remove-orphans --quiet-pull,Start up the container(s)...)
 
 PHONY += shell
 shell: ## Login to CLI container
@@ -40,7 +40,7 @@ ssh-check: ## Check SSH keys on CLI container
 
 ifeq ($(RUN_ON),docker)
 define docker_run_cmd
-	@${DOCKER_COMPOSE_EXEC} -u ${CLI_USER} ${CLI_SERVICE} ${CLI_SHELL} -c "$(1) && echo $(2)"
+	@${DOCKER_COMPOSE_EXEC} -u ${CLI_USER} -T ${CLI_SERVICE} ${CLI_SHELL} -c "$(1) && echo $(2)"
 endef
 else
 define docker_run_cmd

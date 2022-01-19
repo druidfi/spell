@@ -1,6 +1,7 @@
 name: Drupal
 
 on:
+  pull_request:
   push:
     branches:
       # Push events on main branch
@@ -25,7 +26,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['7.3', '7.4', '8.0']
+        php-versions: ['8.0', '8.1']
 
     services:
       db:
@@ -86,7 +87,7 @@ jobs:
       - name: Run web server with Drush
         run: |
           vendor/bin/drush runserver $SIMPLETEST_BASE_URL > /dev/null 2>&1 &
-          chromedriver --port=4444 > /dev/null 2>&1 &
+          chromedriver --port=4444 &
 
       - name: Run PHPUnit tests
         run: |

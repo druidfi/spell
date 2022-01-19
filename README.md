@@ -7,8 +7,8 @@ environment with Stonehenge.
 
 ## Includes
 
-- Drupal 9.2.x
-- Drush 10.x
+- Drupal 9.3.x
+- Drush 11.x
 - Docker setup for development, see [docker-compose.yml](docker-compose.yml)
 - [druidfi/tools](https://github.com/druidfi/tools)
 - Web root is `./public`
@@ -35,7 +35,7 @@ Or using Docker image:
 ```
 mkdir yoursite && cd yoursite && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
-    druidfi/drupal-web:php-7.4 \
+    druidfi/drupal-web:php-8.0 \
     composer create-project druidfi/spell:dev-main . --no-interaction
 ```
 
