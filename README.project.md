@@ -4,11 +4,11 @@ Description of your project.
 
 ## Environments
 
-Env | Branch | Drush alias | URL
---- | ------ | ----------- | ---
-development | * | - | http://yoursite.docker.so/
-testing | dev | @dev | TBD
-production | main | @main | TBD
+| Env         | Branch | Drush alias | URL                        |
+|-------------|--------|-------------|----------------------------|
+| development | *      | -           | http://yoursite.docker.so/ |
+| testing     | dev    | @dev        | TBD                        |
+| production  | main   | @main       | TBD                        |
 
 ## Requirements
 
@@ -32,7 +32,7 @@ And following times to create and start the environment:
 make fresh
 ```
 
-NOTE: Change these according of the state of your project.
+NOTE: Change these according to the state of your project.
 
 ## Login to Drupal container
 
