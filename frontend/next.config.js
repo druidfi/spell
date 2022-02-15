@@ -5,9 +5,8 @@ module.exports = (phase, { defaultConfig }) => {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   }
 
-  return {
-    images: {
-      domains: [process.env.NEXT_IMAGE_DOMAIN],
-    },
-  }
+  defaultConfig.poweredByHeader = false;
+  defaultConfig.images.domains = [process.env.NEXT_IMAGE_DOMAIN];
+
+  return defaultConfig;
 }
