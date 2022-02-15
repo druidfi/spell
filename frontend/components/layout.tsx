@@ -11,7 +11,7 @@ export function Layout({ children }) {
       <header>
         <div className="container mx-auto flex items-center justify-between py-6">
           <Link href="/" passHref>
-            <a className="no-underline text-2xl font-semibold">Brand.</a>
+            <a className="no-underline text-2xl font-semibold">Drupal ❤️ Next.js</a>
           </Link>
           <nav>
             <ul className={`flex`}>
