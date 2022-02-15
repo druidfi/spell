@@ -5,7 +5,7 @@
 This is a skeleton repository which will create a new Drupal project for you and setup Docker based development
 environment with Stonehenge.
 
-## Includes
+## Backend
 
 - Drupal 9.3.x
 - Drush 11.x
@@ -14,6 +14,13 @@ environment with Stonehenge.
 - Web root is `./public`
 - Configuration is in `./conf/cmi`
 - Custom modules can be created in `./public/modules/custom`
+
+## Frontend
+
+- Next.js 12
+- TypeScript
+- Node 16
+- Frontend code is in `./frontend`
 
 ## Requirements
 

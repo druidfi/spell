@@ -6,4 +6,4 @@ id: frontend
 label: Frontend
 base_url: 'http://localhost:3000'
 preview_url: 'http://localhost:3000/api/preview'
-preview_secret: preview-secret-here
+preview_secret: s3cr3t

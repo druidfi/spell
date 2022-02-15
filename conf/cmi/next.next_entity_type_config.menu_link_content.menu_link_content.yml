@@ -1,0 +1,9 @@
+uuid: b6d385fa-8c16-4ec6-b03a-3a85d2dbcdaa
+langcode: en
+status: true
+dependencies: {  }
+id: menu_link_content.menu_link_content
+site_resolver: site_selector
+configuration:
+  sites:
+    frontend: frontend

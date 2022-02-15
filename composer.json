@@ -22,6 +22,7 @@
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/core-recommended": "^9.3",
         "drupal/gin": "^3.0@alpha",
+        "drupal/jsonapi_menu_items": "^1.2",
         "drupal/next": "^1.0",
         "drush/drush": "^11.0"
     },
