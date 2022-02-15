@@ -1,14 +1,15 @@
 _core:
-  default_config_hash: l58O_yEXSo-SeJi19LXdzTU1tNJG3lmnIhCitRkM1tk
+  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE
 langcode: en
-uuid: 771c0d85-77d2-4920-8ee7-d67915820db1
-name: 'Drush Site-Install'
+uuid: 1a7d2047-f4dc-4686-a2df-c4ef2172df43
+name: 'Next.js + Drupal'
 mail: admin@example.com
 slogan: ''
 page:
   403: ''
   404: ''
-  front: /user/login
+  front: /node/6
 admin_compact_mode: false
 weight_select_max: 100
 default_langcode: en
+mail_notification: ''

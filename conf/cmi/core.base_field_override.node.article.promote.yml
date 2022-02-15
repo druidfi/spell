@@ -1,5 +1,5 @@
-uuid: 29f5966f-4ace-453f-8520-509e9d1bf44e
-langcode: en
+uuid: 4c5f2b35-72bc-4ae4-875b-2c186d63814b
+langcode: es
 status: true
 dependencies:
   config:
@@ -14,7 +14,7 @@ required: false
 translatable: true
 default_value:
   -
-    value: 0
+    value: 1
 default_value_callback: ''
 settings:
   on_label: 'On'

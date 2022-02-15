@@ -1,0 +1,48 @@
+uuid: 7ec611a6-315f-4abb-bd66-0de56b881235
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.property_listing.body
+    - field.field.node.property_listing.field_baths
+    - field.field.node.property_listing.field_beds
+    - field.field.node.property_listing.field_images
+    - field.field.node.property_listing.field_location
+    - field.field.node.property_listing.field_price
+    - field.field.node.property_listing.field_size
+    - field.field.node.property_listing.field_status
+    - field.field.node.property_listing.field_teaser
+    - node.type.property_listing
+  module:
+    - text
+    - user
+id: node.property_listing.teaser
+targetEntityType: node
+bundle: property_listing
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_baths: true
+  field_beds: true
+  field_images: true
+  field_location: true
+  field_price: true
+  field_size: true
+  field_status: true
+  field_teaser: true
+  langcode: true
+  search_api_excerpt: true

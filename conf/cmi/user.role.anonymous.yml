@@ -1,16 +1,27 @@
-uuid: 0b83aef5-db31-4560-9eac-ee5cd701117d
+uuid: d5f77445-2c1d-4067-af84-7744f8b28c30
 langcode: en
 status: true
 dependencies:
+  config:
+    - filter.format.restricted_html
+    - rest.resource.webform_rest_submit
   module:
+    - filter
     - media
+    - rest
+    - simple_oauth
+    - subrequests
     - system
 _core:
-  default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
+  default_config_hash: pq_mEIu_B4widZN7Ap81iCJSjShFFdcL0jEiCi8VrDk
 id: anonymous
 label: 'Anonymous user'
-weight: 0
+weight: -10
 is_admin: false
 permissions:
   - 'access content'
+  - 'debug simple_oauth tokens'
+  - 'issue subrequests'
+  - 'restful post webform_rest_submit'
+  - 'use text format restricted_html'
   - 'view media'

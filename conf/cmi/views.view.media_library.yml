@@ -1,4 +1,4 @@
-uuid: 6576500d-259f-49fc-96b6-a8f108a6257f
+uuid: 6b5978cb-4dbc-4616-b24d-0b4b909c88ba
 langcode: en
 status: true
 dependencies:
@@ -14,7 +14,7 @@ dependencies:
     module:
       - media_library
 _core:
-  default_config_hash: gwWddpnrcBNCeMMhBUs1ev70wVLY4W2RDH6KqprhheA
+  default_config_hash: dHOSWSHbMJNke0ZBGh1O5KrnwynSOCOpQycITW-pwfs
 id: media_library
 label: 'Media library'
 module: views
@@ -25,7 +25,7 @@ base_field: mid
 display:
   default:
     id: default
-    display_title: Default
+    display_title: Master
     display_plugin: default
     position: 0
     display_options:

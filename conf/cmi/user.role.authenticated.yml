@@ -1,16 +1,28 @@
-uuid: faea8e15-964f-4a25-94aa-86b44db473c0
+uuid: b74d5033-c41f-4698-ae25-f1de2d642885
 langcode: en
 status: true
 dependencies:
+  config:
+    - filter.format.basic_html
+    - rest.resource.webform_rest_submit
   module:
+    - filter
     - media
+    - rest
+    - shortcut
+    - simple_oauth
     - system
 _core:
-  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+  default_config_hash: btW6TFHajhy7Eo6YUvdFiPh4TcPggo8GBXYctjV6zag
 id: authenticated
 label: 'Authenticated user'
-weight: 1
+weight: -9
 is_admin: false
 permissions:
   - 'access content'
+  - 'access shortcuts'
+  - 'debug simple_oauth tokens'
+  - 'grant simple_oauth codes'
+  - 'restful post webform_rest_submit'
+  - 'use text format basic_html'
   - 'view media'

@@ -1,4 +1,4 @@
-uuid: 7edbfc5b-90c3-4c23-8a98-ebefabe6fde9
+uuid: 7c02baf2-2a93-44dc-8228-b26d0a43f250
 langcode: en
 status: true
 dependencies:
@@ -7,12 +7,12 @@ dependencies:
 id: article
 label: Article
 type: 'canonical_entities:node'
-pattern: 'article/[node:title]'
+pattern: 'blog/[node:source:title]'
 selection_criteria:
-  2ba427ed-2270-4764-9fc0-4f647c8f4f3f:
+  50ef3322-bc36-4544-92cb-8b84ce6a16a8:
     id: node_type
     negate: false
-    uuid: 2ba427ed-2270-4764-9fc0-4f647c8f4f3f
+    uuid: 50ef3322-bc36-4544-92cb-8b84ce6a16a8
     context_mapping:
       node: node
     bundles:

@@ -1,4 +1,4 @@
-uuid: 9c3a3fa9-ccbd-4c26-b2b9-b96e58d24cde
+uuid: a1774ec6-3bf1-4b96-b206-803886970a8f
 langcode: en
 status: true
 dependencies: {  }
@@ -6,4 +6,6 @@ id: node.page
 site_resolver: site_selector
 configuration:
   sites:
-    frontend: frontend
+    example_marketing: example_marketing
+    example_blog: '0'
+    no_preview_site: '0'

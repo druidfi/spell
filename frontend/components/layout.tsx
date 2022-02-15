@@ -1,38 +1,23 @@
-import Link from "next/link"
-import { useMenu } from "next-drupal"
-import { useRouter } from "next/dist/client/router"
+import * as React from "react"
+import { DrupalMenuLinkContent } from "next-drupal"
 
-export function Layout({ children }) {
-  const { asPath } = useRouter()
-  const { tree } = useMenu("main")
+import { Navbar } from "components/navbar"
+import { Footer } from "components/footer"
 
+export interface LayoutProps {
+  menus: {
+    main: DrupalMenuLinkContent[]
+    footer: DrupalMenuLinkContent[]
+  }
+  children?: React.ReactNode
+}
+
+export function Layout({ menus, children }: LayoutProps) {
   return (
-    <div className="max-w-screen-md mx-auto px-6">
-      <header>
-        <div className="container mx-auto flex items-center justify-between py-6">
-          <Link href="/" passHref>
-            <a className="no-underline text-2xl font-semibold">Drupal ❤️ Next.js</a>
-          </Link>
-          <nav>
-            <ul className={`flex`}>
-              {tree?.map((link) => (
-                <li key={link.url}>
-                  <Link href={link.url} passHref>
-                    <a
-                      className={`ml-10 hover:text-blue-600 ${
-                        asPath === link.url ? "underline" : "no-underline"
-                      }`}
-                    >
-                      {link.title}
-                    </a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </header>
-      <main className="container mx-auto py-10">{children}</main>
+    <div className="flex flex-col min-h-screen">
+      <Navbar links={menus.main} />
+      <main className="flex-1">{children}</main>
+      <Footer links={menus.footer} />
     </div>
   )
 }
