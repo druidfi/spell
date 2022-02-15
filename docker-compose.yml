@@ -2,6 +2,27 @@ version: '3.7'
 
 services:
 
+  frontend:
+    container_name: "${COMPOSE_PROJECT_NAME}-frontend"
+    build:
+      context: ./frontend
+      args:
+        NODE_VERSION: ${NODE_VERSION:-16}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-frontend.entrypoints=https"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-frontend.rule=Host(`frontend-${DRUPAL_HOSTNAME}`)"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-frontend.tls=true"
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-frontend.loadbalancer.server.port=3000"
+      - "traefik.docker.network=stonehenge-network"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - internal
+      - stonehenge-network
+    depends_on:
+      - app
+
   app:
     hostname: "${DRUPAL_HOSTNAME}"
     container_name: "${COMPOSE_PROJECT_NAME}-app"
@@ -29,6 +50,8 @@ services:
     networks:
       - internal
       - stonehenge-network
+    depends_on:
+      - db
 
   db:
     container_name: "${COMPOSE_PROJECT_NAME}-db"
