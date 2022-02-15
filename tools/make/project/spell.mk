@@ -3,7 +3,7 @@ TEST_TARGETS := test-simpletest
 PHONY += cast-spell
 cast-spell: BASENAME := $(shell basename $(CURDIR))
 cast-spell: ## Init Spell project
-	$(call step,Init Spell project...)
+	$(call step,Init Spell project...\n)
 	@sed -i -e 's|mysite|'"${BASENAME}"'|g' .env
 ifeq ($(UNAME_S),Darwin)
 	@sed -i '' '/composer.lock/d' .gitignore
@@ -15,6 +15,13 @@ endif
 	@$(MAKE) self-update
 	@composer config --unset scripts.post-create-project-cmd
 	@git init --initial-branch=main && git add .
+	@$(MAKE) create-nextjs-app
+
+PHONY += create-nextjs-app
+create-nextjs-app: STARTER := https://github.com/chapter-three/next-drupal-basic-starter
+create-nextjs-app:
+	$(call step,Create Next.js app...\n)
+	@npx create-next-app --typescript -e $(STARTER) frontend
 
 PHONY += test-simpletest
 test-simpletest: DB_CONTAINER := spell_db

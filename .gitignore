@@ -1,4 +1,5 @@
 # Ignore project files that should not be in version control
+conf/keys
 drush/sites/
 drush/Commands/*/
 node_modules

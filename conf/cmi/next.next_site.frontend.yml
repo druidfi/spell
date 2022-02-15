@@ -1,0 +1,9 @@
+uuid: 368d3f7b-3dfd-4a11-832b-a0a56233559a
+langcode: en
+status: true
+dependencies: {  }
+id: frontend
+label: Frontend
+base_url: 'http://localhost:3000'
+preview_url: 'http://localhost:3000/api/preview'
+preview_secret: preview-secret-here

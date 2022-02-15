@@ -23,3 +23,6 @@ if (isset($_SERVER['WODBY_APP_NAME'])) {
   // Override setting from wodby.settings.php.
   $settings['config_sync_directory'] = '../conf/cmi';
 }
+
+// Set better hash salt for Simple Oauth
+$settings['hash_salt'] = 'F0UE6tYRCwyHa-gDy-bPyDKeXFyx7cljMVT-Lxr-Rvg';

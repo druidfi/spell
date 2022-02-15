@@ -1,0 +1,9 @@
+uuid: 9c3a3fa9-ccbd-4c26-b2b9-b96e58d24cde
+langcode: en
+status: true
+dependencies: {  }
+id: node.page
+site_resolver: site_selector
+configuration:
+  sites:
+    frontend: frontend
