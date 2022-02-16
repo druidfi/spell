@@ -9,7 +9,6 @@ dependencies:
     - filter
     - media
     - rest
-    - shortcut
     - simple_oauth
     - system
 _core:
@@ -20,7 +19,6 @@ weight: -9
 is_admin: false
 permissions:
   - 'access content'
-  - 'access shortcuts'
   - 'debug simple_oauth tokens'
   - 'grant simple_oauth codes'
   - 'restful post webform_rest_submit'
