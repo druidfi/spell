@@ -20,7 +20,7 @@ export function Navbar({ links, ...props }: NavbarProps) {
     >
       <div className="container flex flex-col items-start justify-between px-6 mx-auto md:flex-row md:items-center">
         <Link href="/" locale={locale} passHref>
-          <a className="text-lg font-bold">Marketing</a>
+          <a className="text-lg font-bold">Drupal ❤️ Next.js</a>
         </Link>
         {links ? <Menu items={links} /> : null}
         <div className="absolute flex justify-end md:static top-2 right-4">

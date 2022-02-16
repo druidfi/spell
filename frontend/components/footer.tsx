@@ -11,7 +11,7 @@ export function Footer({ links }: FooterProps) {
       <div className="container px-6 py-12 mx-auto">
         <div className="flex flex-col items-center justify-between text-sm md:flex-row">
           <p className="mb-6 md:mb-0">
-            © {new Date().getFullYear()} Next.js + Drupal
+            © {new Date().getFullYear()} Druid.fi
           </p>
           {links?.length ? (
             <ul className="flex gap-4">
