@@ -6,7 +6,6 @@ module.exports = (phase, { defaultConfig }) => {
   }
 
   let config = {
-    swcMinify: true,
     i18n: {
       locales: ["en", "fi"],
       defaultLocale: "en",
@@ -17,22 +16,14 @@ module.exports = (phase, { defaultConfig }) => {
     async rewrites() {
       return [
         {
-          source: "/blog",
-          destination: "/blog/page/0",
-        },
-        {
-          source: "/es",
-          destination: "/es/home",
-          locale: false,
-        },
-        {
-          source: "/en/principal",
-          destination: "/",
+          source: "/fi",
+          destination: "/fi/home",
           locale: false,
         },
       ]
     },
     poweredByHeader: false,
+    swcMinify: true,
   };
 
   return {
