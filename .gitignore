@@ -11,6 +11,8 @@ public/sites/default/files
 public/sites/simpletest
 vendor
 
+*.sql
+
 # Ignore the folder created by PhpStorm
 .idea/*
 

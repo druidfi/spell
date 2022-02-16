@@ -15,13 +15,7 @@ endif
 	@$(MAKE) self-update
 	@composer config --unset scripts.post-create-project-cmd
 	@git init --initial-branch=main && git add .
-	@$(MAKE) create-nextjs-app
-
-PHONY += create-nextjs-app
-create-nextjs-app: STARTER := https://github.com/chapter-three/next-drupal-basic-starter
-create-nextjs-app:
-	$(call step,Create Next.js app...\n)
-	@npx create-next-app --typescript -e $(STARTER) frontend
+	@gzip -dk $(DUMP_SQL_FILENAME).gz
 
 PHONY += test-simpletest
 test-simpletest: DB_CONTAINER := spell_db

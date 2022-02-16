@@ -29,8 +29,6 @@ environment with Stonehenge.
 
 ## Create a new project
 
-### 1. using Composer
-
 If you have PHP and Composer installed on your host (recommended):
 
 ```
@@ -50,10 +48,10 @@ docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
 
 Now you need to have Stonehenge up & running.
 
-Start the development environment, build development codebase and install empty site with minimal profile:
+Start the development environment, build development codebase and import included database dump:
 
 ```
-make new
+make fresh
 ```
 
 Now your site can can be accessed from https://yoursite.docker.so
