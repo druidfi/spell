@@ -34,7 +34,7 @@ environment with Stonehenge.
 If you have PHP and Composer installed on your host (recommended):
 
 ```
-composer create-project druidfi/spell:dev-main yoursite --no-interaction
+composer create-project druidfi/spell:dev-next yoursite --no-interaction
 ```
 
 Or using Docker image:
@@ -43,14 +43,8 @@ Or using Docker image:
 mkdir yoursite && cd yoursite && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
     druidfi/drupal-web:php-8.0 \
-    composer create-project druidfi/spell:dev-main . --no-interaction
+    composer create-project druidfi/spell:dev-next . --no-interaction
 ```
-
-### 2. using GitHub template
-
-Go to https://github.com/druidfi/spell/generate and create your own repository.
-
-When you have cloned your repo, move to `Get Started` section.
 
 ## Get started
 
