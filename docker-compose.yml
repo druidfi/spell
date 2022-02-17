@@ -32,7 +32,6 @@ services:
       - ssh:/tmp/druid_ssh-agent:ro
     environment:
       APP_ENV: "${APP_ENV:-dev}"
-      DRUPAL_ROUTES: "https://varnish-${DRUPAL_HOSTNAME}"
       DRUSH_OPTIONS_URI: "https://${DRUPAL_HOSTNAME}"
       PHP_SENDMAIL_PATH: "/usr/sbin/sendmail -S stonehenge-mailhog:1025"
       #XDEBUG_ENABLE: "true"
@@ -62,24 +61,6 @@ services:
       - "3306"
     networks:
       - internal
-
-  varnish:
-    container_name: "${COMPOSE_PROJECT_NAME}-varnish"
-    image: druidfi/varnish:6-drupal
-    environment:
-      VARNISH_BACKEND_HOST: "${COMPOSE_PROJECT_NAME}-app"
-    depends_on:
-      - app
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-varnish.entrypoints=https"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-varnish.rule=Host(`varnish-${DRUPAL_HOSTNAME}`)"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-varnish.tls=true"
-      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-varnish.loadbalancer.server.port=6081"
-      - "traefik.docker.network=stonehenge-network"
-    networks:
-      - internal
-      - stonehenge-network
 
 networks:
   internal:
