@@ -11,6 +11,7 @@ CLEAN_FOLDERS += ${WEBROOT}/libraries
 CLEAN_FOLDERS += ${WEBROOT}/modules/contrib
 CLEAN_FOLDERS += ${WEBROOT}/profiles/contrib
 CLEAN_FOLDERS += ${WEBROOT}/themes/contrib
+DRUPAL_DISABLE_MODULES ?= no
 DRUPAL_ENABLE_MODULES ?= no
 endif
 DRUPAL_PROFILE ?= minimal
@@ -37,6 +38,10 @@ FIX_TARGETS += fix-drupal
 
 ifeq ($(GH_DUMP_ARTIFACT),yes)
 	DRUPAL_FRESH_TARGETS := gh-download-dump $(DRUPAL_FRESH_TARGETS)
+endif
+
+ifneq ($(DRUPAL_DISABLE_MODULES),no)
+	SYNC_TARGETS += drush-disable-modules
 endif
 
 ifneq ($(DRUPAL_ENABLE_MODULES),no)
@@ -123,6 +128,15 @@ PHONY += post-install
 post-install: ## Run post-install Drush actions
 	@$(MAKE) $(DRUPAL_POST_INSTALL_TARGETS) drush-uli
 
+PHONY += drush-disable-modules
+drush-disable-modules: ## Disable Drupal modules
+	$(call step,Disable Drupal modules...\n)
+ifneq ($(DRUPAL_DISABLE_MODULES),no)
+	$(call drush,pmu -y $(subst ",,$(DRUPAL_DISABLE_MODULES)))
+else
+	$(call sub_step,No modules to disable)
+endif
+
 PHONY += drush-enable-modules
 drush-enable-modules: ## Enable Drupal modules
 	$(call step,Enable Drupal modules...\n)
@@ -170,6 +184,13 @@ drush-create-dump: ## Create database dump to dump.sql
 PHONY += drush-download-dump
 drush-download-dump: ## Download database dump to dump.sql
 	$(call drush,-Dssh.tty=0 @$(DRUPAL_SYNC_SOURCE) sql-dump --structure-tables-key=common > ${DOCKER_PROJECT_ROOT}/$(DUMP_SQL_FILENAME))
+
+PHONY += open-db-gui
+open-db-gui: DB_CONTAINER := $(COMPOSE_PROJECT_NAME)-db
+open-db-gui: DB_NAME := drupal
+open-db-gui: DB_USER := drupal
+open-db-gui: DB_PASS := drupal
+open-db-gui: --open-db-gui ## Open database with GUI tool
 
 PHONY += fix-drupal
 fix-drupal: PATHS := $(subst $(space),,$(LINT_PATHS_PHP))

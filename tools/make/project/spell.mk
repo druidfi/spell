@@ -4,15 +4,9 @@ PHONY += cast-spell
 cast-spell: BASENAME := $(shell basename $(CURDIR))
 cast-spell: ## Init Spell project
 	$(call step,Init Spell project...\n)
-ifeq ($(UNAME_S),Darwin)
-	@sed -i '' 's/mysite/${BASENAME}/g' .env
-	@sed -i '' 's/mysite/${BASENAME}/g' frontend/.env
-	@sed -i '' '/composer.lock/d' .gitignore
-else
-	@sed -i 's/mysite/${BASENAME}/g' .env
-	@sed -i 's/mysite/${BASENAME}/g' frontend/.env
-	@sed -i '/composer.lock/d' .gitignore
-endif
+	$(call replace_string,mysite,$(BASENAME),.env)
+	$(call replace_string,mysite,$(BASENAME),frontend/.env)
+	$(call remove_string,composer.lock,.gitignore)
 	@rm -rf LICENSE.md README.md tools/make/project/spell.mk
 	@mv README.project.md README.md
 	@$(MAKE) self-update
