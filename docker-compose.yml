@@ -14,7 +14,8 @@ services:
       DRUPAL_ROUTES: "https://varnish-${DRUPAL_HOSTNAME}"
       DRUSH_OPTIONS_URI: "https://${DRUPAL_HOSTNAME}"
       PHP_SENDMAIL_PATH: "/usr/sbin/sendmail -S stonehenge-mailhog:1025"
-      #XDEBUG_ENABLE: "true"
+      # Run `export XDEBUG_ENABLE=true` to enable xdebug.
+      XDEBUG_ENABLE: "${XDEBUG_ENABLE:-false}"
       SIMPLETEST_BASE_URL: "http://app:8080"
       SIMPLETEST_DB: "mysql://drupal:drupal@db:3306/drupal"
     labels:
