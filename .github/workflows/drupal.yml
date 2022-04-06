@@ -81,8 +81,8 @@ jobs:
       - name: Operate on Drupal
         run: |
           vendor/bin/drush status
-          composer require --no-progress drupal/filelog
-          vendor/bin/drush en --yes filelog
+          composer require --no-progress drupal/metatag
+          vendor/bin/drush en --yes metatag
 
       - name: Run web server with Drush
         run: |
@@ -105,7 +105,5 @@ jobs:
         if: always()
         with:
           name: results
-          path: |
-            public/sites/simpletest/browser_output/
-            public/sites/default/files/logs/drupal.log
+          path: public/sites/simpletest/browser_output/
           retention-days: 1
