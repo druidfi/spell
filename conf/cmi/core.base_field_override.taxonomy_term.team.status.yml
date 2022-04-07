@@ -1,13 +1,13 @@
-uuid: 1adde23e-c9a9-43c6-a8b8-f3c112bd9211
-langcode: es
+uuid: 3198d189-1238-490b-8f97-5d73cadc1ce6
+langcode: fi
 status: true
 dependencies:
   config:
-    - node.type.landing_page
-id: node.landing_page.status
+    - taxonomy.vocabulary.team
+id: taxonomy_term.team.status
 field_name: status
-entity_type: node
-bundle: landing_page
+entity_type: taxonomy_term
+bundle: team
 label: Published
 description: ''
 required: false

@@ -1,13 +1,13 @@
-uuid: 1adde23e-c9a9-43c6-a8b8-f3c112bd9211
-langcode: es
+uuid: f8e798b1-4d2c-4ef5-b5d0-61658bee724f
+langcode: fi
 status: true
 dependencies:
   config:
-    - node.type.landing_page
-id: node.landing_page.status
+    - paragraphs.paragraphs_type.view
+id: paragraph.view.status
 field_name: status
-entity_type: node
-bundle: landing_page
+entity_type: paragraph
+bundle: view
 label: Published
 description: ''
 required: false

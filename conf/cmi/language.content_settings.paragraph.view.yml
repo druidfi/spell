@@ -1,9 +1,9 @@
-uuid: c0c9638c-7a69-4ec3-9242-a4f112592fd7
-langcode: en
+uuid: e690dba8-d403-4d29-a60c-1847d0a18125
+langcode: fi
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.team
+    - paragraphs.paragraphs_type.view
   module:
     - content_translation
 third_party_settings:
@@ -11,8 +11,8 @@ third_party_settings:
     enabled: false
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: taxonomy_term.team
-target_entity_type_id: taxonomy_term
-target_bundle: team
+id: paragraph.view
+target_entity_type_id: paragraph
+target_bundle: view
 default_langcode: site_default
 language_alterable: false

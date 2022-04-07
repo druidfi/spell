@@ -1,0 +1,18 @@
+uuid: 93bbaad7-1f1a-4c7a-8057-34a91ba335b5
+langcode: fi
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.property_location
+id: taxonomy_term.property_location.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: property_location
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

@@ -1,0 +1,18 @@
+uuid: 1b843fef-0328-42f1-8b9f-d7f7f8782d55
+langcode: fi
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.team
+id: taxonomy_term.team.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: team
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed
