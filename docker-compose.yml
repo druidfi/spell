@@ -2,31 +2,32 @@ version: '3.7'
 
 services:
 
-  frontend:
-    container_name: "${COMPOSE_PROJECT_NAME}-frontend"
-    build:
-      context: ./frontend
-      args:
-        NODE_VERSION: ${NODE_VERSION:-16}
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-frontend.entrypoints=https"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-frontend.rule=Host(`frontend-${DRUPAL_HOSTNAME}`)"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-frontend.tls=true"
-      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-frontend.loadbalancer.server.port=3000"
-      - "traefik.docker.network=stonehenge-network"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    networks:
-      - internal
-      - stonehenge-network
-    depends_on:
-      - app
+#  frontend:
+#    container_name: "${COMPOSE_PROJECT_NAME}-frontend"
+#    build:
+#      context: ./frontend
+#      args:
+#        NODE_VERSION: ${NODE_VERSION:-16}
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-frontend.entrypoints=https"
+#      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-frontend.rule=Host(`frontend-${DRUPAL_HOSTNAME}`)"
+#      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-frontend.tls=true"
+#      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-frontend.loadbalancer.server.port=3000"
+#      - "traefik.docker.network=stonehenge-network"
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
+#      - "${DRUPAL_HOSTNAME}:host-gateway"
+#    networks:
+#      - internal
+#      - stonehenge-network
+#    depends_on:
+#      - app
 
   app:
     hostname: "${DRUPAL_HOSTNAME}"
     container_name: "${COMPOSE_PROJECT_NAME}-app"
-    image: "${DRUPAL_IMAGE}"
+    image: "druidfi/drupal-web:php-${PHP_VERSION}"
     volumes:
       - .:/app:delegated
       - ssh:/tmp/druid_ssh-agent:ro
