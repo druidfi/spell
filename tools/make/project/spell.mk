@@ -38,8 +38,8 @@ test-simpletest: vendor/bin/drush ## Run same tests as in GHA
 vendor/bin/drush:
 		@composer install -n
 
-PHONY += create-data
-create-data:
-	$(call step,Create data...\n)
-	$(call drush,user:create frontend --mail="frontend@example.com" --password="s3cr3t")
-	$(call drush,user-add-role "next_site_previewer" frontend)
+PHONY += update-included-dump
+update-included-dump: ## Update dump.sql.gz
+		$(call step,Update included dump...\n)
+		@$(MAKE) drush-create-dump
+		@gzip -fk $(DUMP_SQL_FILENAME)

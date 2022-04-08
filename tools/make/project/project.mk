@@ -1,3 +1,4 @@
+BUILD_TARGETS := dump.sql $(BUILD_TARGETS)
 BUILD_TARGETS += conf/keys
 DRUPAL_NEW_TARGETS := up build drush-si next-create-user drush-uli
 
@@ -5,6 +6,10 @@ PHONY += start
 start: conf/keys
 	$(call step,Start up front application...\n)
 	$(call node_run,run dev)
+
+dump.sql:
+	$(call step,Extract included database dump...\n)
+	@gunzip -k dump.sql.gz && echo "Dump file extracted"
 
 conf/keys:
 	$(call step,Create oAuth keys...\n)
