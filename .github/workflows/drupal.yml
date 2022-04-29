@@ -16,6 +16,7 @@ env:
   DRUPAL_INSTALL_PROFILE: minimal
   SIMPLETEST_DB: mysql://drupal:drupal@127.0.0.1:3306/drupal
   SIMPLETEST_BASE_URL: http://127.0.0.1:8080
+  BROWSERTEST_OUTPUT_DIRECTORY: 'public/sites/simpletest'
 
 jobs:
 
@@ -89,12 +90,17 @@ jobs:
           vendor/bin/drush runserver $SIMPLETEST_BASE_URL > /dev/null 2>&1 &
           chromedriver --port=4444 &
 
+      - name: Wait for web server to start
+        run: for i in {1..5}; do RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$SIMPLETEST_BASE_URL" || true); if [ "$RESPONSE_CODE" -gt "301" ] || [ "$RESPONSE_CODE" -lt "200" ]; then sleep 2; fi; done
+
       - name: Run PHPUnit tests
         run: |
-          set -o pipefail && vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml.dist --testdox --verbose | tee phpunit-result.txt
-          cat phpunit-result.txt | grep -q "✔ Unit test"
-          cat phpunit-result.txt | grep -q "✔ Kernel test"
-          cat phpunit-result.txt | grep -q "✔ Functional test"
-          cat phpunit-result.txt | grep -q "✔ Javascript test"
+          set -o pipefail && vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml.dist --verbose
 
-
+      - name: Create an artifact from test report
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: results
+          path: public/sites/simpletest/browser_output/
+          retention-days: 1
