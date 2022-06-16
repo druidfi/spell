@@ -71,7 +71,7 @@ jobs:
 
       - name: Lint
         run: |
-          vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer
+          vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer,vendor/slevomat/coding-standard
           vendor/bin/phpcs -i
           vendor/bin/phpcs --standard=Drupal,DrupalPractice -n public/modules/custom
           vendor/bin/phpcs --standard=Drupal,DrupalPractice -n public/themes/custom
