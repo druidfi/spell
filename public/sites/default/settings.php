@@ -6,11 +6,11 @@
 //
 // ENV.settings.php and ENV.services.yml
 // and
-// local.settings.php and local.service.yml
+// local.settings.php and local.services.yml
 //
 // These files are loaded automatically if found.
 //
-extract((new Druidfi\Omen\DrupalEnvDetector(__DIR__))->getConfiguration());
+extract((new Druidfi\Omen\Reader(__DIR__))->get());
 
 /**
  * Only in Wodby environment. @see https://wodby.com/docs/stacks/drupal/#overriding-settings-from-wodbysettingsphp
