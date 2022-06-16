@@ -5,7 +5,7 @@ services:
   app:
     hostname: "${DRUPAL_HOSTNAME}"
     container_name: "${COMPOSE_PROJECT_NAME}-app"
-    image: "${DRUPAL_IMAGE}"
+    image: "druidfi/drupal-web:php-${PHP_VERSION}"
     volumes:
       - .:/app:delegated
       - ssh:/tmp/druid_ssh-agent:ro
