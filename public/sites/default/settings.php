@@ -10,7 +10,7 @@
 //
 // These files are loaded automatically if found.
 //
-extract((new Druidfi\Omen\Reader(__DIR__))->get());
+extract(Druidfi\Omen\Reader::get(get_defined_vars()));
 
 /**
  * Only in Wodby environment. @see https://wodby.com/docs/stacks/drupal/#overriding-settings-from-wodbysettingsphp
