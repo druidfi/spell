@@ -1,8 +1,5 @@
-import { NextApiResponse } from "next"
-
-export default async function exit(_, response: NextApiResponse) {
-  response.clearPreviewData()
-
-  response.writeHead(307, { Location: "/" })
-  response.end()
+export default function exit(_, res) {
+  res.clearPreviewData()
+  res.writeHead(307, { Location: "/" })
+  res.end()
 }

@@ -1,5 +1,5 @@
 import { drupal } from "lib/drupal"
 
-export default async function (request, response) {
-  return await drupal.preview(request, response)
+export default async function handler(req, res) {
+  return await drupal.preview(req, res)
 }
