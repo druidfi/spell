@@ -5,7 +5,10 @@ module.exports = (phase, { defaultConfig }) => {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   }
 
-  let config = {
+  /**
+   * @type {import('next').NextConfig}
+   */
+  const nextConfig = {
     i18n: {
       locales: ["en", "fi"],
       defaultLocale: "en",
@@ -26,8 +29,5 @@ module.exports = (phase, { defaultConfig }) => {
     swcMinify: true,
   };
 
-  return {
-    ...defaultConfig,
-    ...config
-  };
+  return nextConfig;
 }
