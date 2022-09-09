@@ -14,7 +14,7 @@ DRUSH_RSYNC_OPTS ?=  -- --omit-dir-times --no-perms --no-group --no-owner --chmo
 DRUSH_RSYNC_EXCLUDE ?= css:ctools:js:php:tmp:tmp_php
 SYNC_TARGETS += drush-sync
 CS_EXTS := inc,php,module,install,profile,theme
-CS_STANDARD_PATHS := vendor/drupal/coder/coder_sniffer
+CS_STANDARD_PATHS := vendor/drupal/coder/coder_sniffer,vendor/slevomat/coding-standard
 CS_STANDARDS := Drupal,DrupalPractice
 LINT_PATHS_JS += ./$(WEBROOT)/modules/custom/*/js
 LINT_PATHS_JS += ./$(WEBROOT)/themes/custom/*/js
@@ -78,6 +78,7 @@ else
     drush-si: DRUSH_SI := -y $(DRUPAL_PROFILE)
 endif
 drush-si: ## Site install
+	$(call step,Do Drush site:install...\n)
 	$(call drush,si ${DRUSH_SI})
 
 PHONY += drush-deploy
@@ -189,6 +190,6 @@ define drush
 endef
 else
 define drush
-	@cd $(COMPOSER_JSON_PATH)/${WEBROOT} && drush --ansi --strict=0 $(1)
+	@drush --ansi --strict=0 $(1)
 endef
 endif
