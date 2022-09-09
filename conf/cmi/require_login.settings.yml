@@ -1,0 +1,13 @@
+login_path: /user/login
+login_message: ''
+login_destination: ''
+requirements:
+  request_path:
+    id: request_path
+    negate: true
+    pages: |-
+      /oauth/token
+      /jsonapi*
+extra:
+  include_403: false
+  include_404: false

@@ -8,6 +8,8 @@ id: status
 name: Status
 weight: 0
 min_count: 1
+missing: false
+missing_label: others
 url_alias: field_status
 facet_source_id: 'jsonapi_search_api_facets:property'
 field_identifier: field_status

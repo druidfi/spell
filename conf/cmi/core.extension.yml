@@ -30,7 +30,6 @@ module:
   focal_point: 0
   gin_login: 0
   gin_toolbar: 0
-  hal: 0
   image: 0
   jsonapi: 0
   jsonapi_extras: 0
@@ -47,6 +46,7 @@ module:
   menu_ui: 0
   metatag: 0
   metatag_open_graph: 0
+  mysql: 0
   next: 0
   next_extras: 0
   next_jsonapi: 0
