@@ -64,7 +64,7 @@
             "public/profiles/{$name}": ["type:drupal-profile"],
             "public/themes/contrib/{$name}": ["type:drupal-theme"],
             "public/themes/custom/{$name}": ["type:drupal-theme-custom"],
-            "drush/{$name}": ["type:drupal-drush"]
+            "drush/Commands/{$name}": ["type:drupal-drush"]
         }
     },
     "repositories": [
