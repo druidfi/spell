@@ -7,7 +7,7 @@ environment with Stonehenge.
 
 ## Includes
 
-- Drupal 9.4.x
+- Drupal 10.0.x
 - Drush 11.x
 - Docker setup for development, see [docker-compose.yml](docker-compose.yml)
 - [druidfi/tools](https://github.com/druidfi/tools)
