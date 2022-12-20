@@ -35,7 +35,7 @@ Or using Docker image:
 ```
 mkdir yoursite && cd yoursite && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
-    druidfi/drupal-web:php-8.1 \
+    druidfi/drupal-web:php-8.2 \
     composer create-project druidfi/spell:dev-main . --no-interaction
 ```
 
