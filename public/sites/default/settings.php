@@ -12,9 +12,6 @@
 //
 extract(Druidfi\Omen\Reader::get(get_defined_vars()));
 
-// See https://www.drupal.org/docs/system-requirements/setting-the-mysql-transaction-isolation-level
-$databases['default']['default']['init_commands']['isolation_level'] = 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED';
-
 /**
  * Only in Wodby environment. @see https://wodby.com/docs/stacks/drupal/#overriding-settings-from-wodbysettingsphp
  */
