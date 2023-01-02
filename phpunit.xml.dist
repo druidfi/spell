@@ -6,14 +6,15 @@
  or your current system user. See core/tests/README.md and
  https://www.drupal.org/node/2116263 for details.
 -->
-<phpunit bootstrap="public/core/tests/bootstrap.php" colors="true"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         bootstrap="public/core/tests/bootstrap.php" colors="true"
          beStrictAboutTestsThatDoNotTestAnything="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutChangesToGlobalState="true"
          failOnWarning="true"
-         failOnRisky="true"
          printerClass="\Drupal\Tests\Listeners\HtmlOutputPrinter"
-         cacheResult="false">
+         cacheResult="false"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
   <php>
     <!-- Set error reporting to E_ALL. -->
     <ini name="error_reporting" value="32767"/>
@@ -25,19 +26,39 @@
     <env name="SIMPLETEST_DB" value=""/>
     <!-- Example BROWSERTEST_OUTPUT_DIRECTORY value: /path/to/webroot/sites/simpletest/browser_output -->
     <env name="BROWSERTEST_OUTPUT_DIRECTORY" value=""/>
-    <!-- To have browsertest output use an alternative base URL. For example if
-     SIMPLETEST_BASE_URL is an internal DDEV URL, you can set this to the
-     external DDev URL so you can follow the links directly.
-    -->
+    <!-- By default, browser tests will output links that use the base URL set
+     in SIMPLETEST_BASE_URL. However, if your SIMPLETEST_BASE_URL is an internal
+     path (such as may be the case in a virtual or Docker-based environment),
+     you can set the base URL used in the browser test output links to something
+     reachable from your host machine here. This will allow you to follow them
+     directly and view the output. -->
     <env name="BROWSERTEST_OUTPUT_BASE_URL" value=""/>
+
+    <!-- Deprecation testing is managed through Symfony's PHPUnit Bridge.
+      The environment variable SYMFONY_DEPRECATIONS_HELPER is used to configure
+      the behaviour of the deprecation tests.
+      See https://symfony.com/doc/current/components/phpunit_bridge.html#configuration
+      Drupal core's testing framework is setting this variable to its defaults.
+      Projects with their own requirements need to manage this variable
+      explicitly.
+    -->
     <!-- To disable deprecation testing completely uncomment the next line. -->
     <!-- <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/> -->
+    <!-- Deprecation errors can be selectively ignored by specifying a file of
+      regular expression patterns for exclusion.
+      See https://symfony.com/doc/current/components/phpunit_bridge.html#ignoring-deprecations
+      Uncomment the line below to specify a custom deprecations ignore file.
+      NOTE: it may be required to specify the full path to the file to run tests
+      correctly.
+    -->
+    <!-- <env name="SYMFONY_DEPRECATIONS_HELPER" value="ignoreFile=.deprecation-ignore.txt"/> -->
+
     <!-- Example for changing the driver class for mink tests MINK_DRIVER_CLASS value: 'Drupal\FunctionalJavascriptTests\DrupalSelenium2Driver' -->
     <env name="MINK_DRIVER_CLASS" value=''/>
     <!-- Example for changing the driver args to mink tests MINK_DRIVER_ARGS value: '["http://127.0.0.1:8510"]' -->
     <env name="MINK_DRIVER_ARGS" value=''/>
     <!-- Example for changing the driver args to webdriver tests MINK_DRIVER_ARGS_WEBDRIVER value: '["chrome", { "chromeOptions": { "w3c": false } }, "http://localhost:4444/wd/hub"]' For using the Firefox browser, replace "chrome" with "firefox" -->
-    <env name="MINK_DRIVER_ARGS_WEBDRIVER" value='["chrome", {"browserName":"chrome","chromeOptions":{"w3c": false, "args":["--disable-gpu","--headless", "--no-sandbox"]}}, "http://127.0.0.1:4444"]' />
+    <env name="MINK_DRIVER_ARGS_WEBDRIVER" value=''/>
   </php>
   <testsuites>
     <testsuite name="unit">
@@ -65,20 +86,20 @@
     <listener class="\Drupal\Tests\Listeners\DrupalListener">
     </listener>
   </listeners>
-  <!-- Filter for coverage reports. -->
-  <filter>
-    <whitelist>
+  <!-- Settings for coverage reports. -->
+  <coverage>
+    <include>
       <directory suffix=".php">./public/modules/custom/*/src</directory>
       <directory suffix=".php">./public/themes/custom/*/src</directory>
       <directory suffix=".php">./public/profiles/custom/*/src</directory>
       <file>./public/modules/custom/*/*.module</file>
       <file>./public/themes/custom/*/*.theme</file>
       <file>./public/profiles/custom/*/*.profile</file>
-      <exclude>
-        <directory>./public/modules/custom/*/src/Tests</directory>
-        <directory>./public/themes/custom/*/src/Tests</directory>
-        <directory>./public/profiles/custom/*/src/Tests</directory>
-      </exclude>
-    </whitelist>
-  </filter>
+    </include>
+    <exclude>
+      <directory>./public/modules/custom/*/src/Tests</directory>
+      <directory>./public/themes/custom/*/src/Tests</directory>
+      <directory>./public/profiles/custom/*/src/Tests</directory>
+    </exclude>
+  </coverage>
 </phpunit>
