@@ -26,13 +26,13 @@ environment with Stonehenge.
 
 If you have PHP and Composer installed on your host (recommended):
 
-```
+``` shell
 composer create-project druidfi/spell:dev-main yoursite --no-interaction
 ```
 
 Or using Docker image:
 
-```
+``` shell
 mkdir yoursite && cd yoursite && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
     druidfi/drupal-web:php-8.2 \
