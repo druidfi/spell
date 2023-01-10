@@ -9,7 +9,7 @@ environment with Stonehenge.
 
 - Drupal 10.0.x
 - Drush 11.x
-- Docker setup for development, see [docker-compose.yml](docker-compose.yml)
+- Docker Composer setup for development, see [docker-compose.yml](docker-compose.yml)
 - [druidfi/tools](https://github.com/druidfi/tools)
 - Web root is `./public`
 - Configuration is in `./conf/cmi`
@@ -18,7 +18,7 @@ environment with Stonehenge.
 ## Requirements
 
 - PHP and Composer
-- [Docker and Stonehenge](https://github.com/druidfi/guidelines/blob/master/docs/local_dev_env.md)
+- [Docker and Stonehenge](https://druidfi.github.io/guidelines/docs/local_dev_env.html)
 
 ## Create a new project
 
@@ -51,7 +51,7 @@ Now you need to have Stonehenge up & running.
 
 Start the development environment, build development codebase and install empty site with minimal profile:
 
-```
+``` shell
 make new
 ```
 
@@ -69,14 +69,14 @@ You can run `make help` to list all available commands for you.
 
 On macOS you need first to install Chromedriver and allow it to execute:
 
-```
+``` shell
 brew install chromedriver
 xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver
 ```
 
 Then run the same test scenario as in Github Actions:
 
-```
+``` shell
 make test
 ```
 

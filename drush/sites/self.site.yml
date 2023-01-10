@@ -1,0 +1,14 @@
+dev:
+  host: host
+  user: user
+  root: /path/to/public
+  uri: uri
+  ssh:
+    options: '-p PORT -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+main:
+  host: host
+  user: user
+  root: /path/to/public
+  uri: uri
+  ssh:
+    options: '-p PORT -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'

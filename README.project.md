@@ -4,31 +4,31 @@ Description of your project.
 
 ## Environments
 
-| Env         | Branch | Drush alias | URL                        |
-|-------------|--------|-------------|----------------------------|
-| development | *      | -           | http://yoursite.docker.so/ |
-| testing     | dev    | @dev        | TBD                        |
-| production  | main   | @main       | TBD                        |
+| Env         | Branch | Drush alias | URL                         |
+|-------------|--------|-------------|-----------------------------|
+| development | *      | -           | https://yoursite.docker.so/ |
+| testing     | dev    | @dev        | TBD                         |
+| production  | main   | @main       | TBD                         |
 
 ## Requirements
 
 You need to have these applications installed to operate on all environments:
 
-- [Docker](https://github.com/druidfi/guidelines/blob/master/docs/docker.md)
+- [Docker](https://druidfi.github.io/guidelines/docs/docker.html)
 - [Stonehenge](https://github.com/druidfi/stonehenge)
-- For the new person: Your SSH public key needs to be added to servers
+- [Github CLI](https://cli.github.com/)
 
 ## Create and start the environment
 
 For the first time (new project):
 
-```
+``` shell
 make new
 ```
 
 And following times to create and start the environment:
 
-```
+``` shell
 make fresh
 ```
 
@@ -38,6 +38,6 @@ NOTE: Change these according to the state of your project.
 
 This will log you inside the app container:
 
-```
+``` shell
 make shell
 ```
