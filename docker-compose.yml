@@ -1,16 +1,16 @@
 services:
 
   app:
-    hostname: "${DRUPAL_HOSTNAME}"
-    container_name: "${COMPOSE_PROJECT_NAME}-app"
-    image: "druidfi/drupal-web:php-${PHP_VERSION}"
+    hostname: ${DRUPAL_HOSTNAME}
+    container_name: ${COMPOSE_PROJECT_NAME}-app
+    image: druidfi/drupal-web:php-${PHP_VERSION}
     volumes:
       - .:/app:delegated
       - ssh:/tmp/druid_ssh-agent:ro
     environment:
       APP_ENV: "${APP_ENV:-dev}"
       DRUSH_OPTIONS_URI: "https://${DRUPAL_HOSTNAME}"
-      PHP_SENDMAIL_PATH: "/usr/sbin/sendmail -S stonehenge-mailhog:1025"
+      PHP_SENDMAIL_PATH: "/usr/sbin/sendmail -S stonehenge:1025"
       # Run `export XDEBUG_ENABLE=true` to enable xdebug.
       XDEBUG_ENABLE: "${XDEBUG_ENABLE:-false}"
       SIMPLETEST_BASE_URL: "http://app:8080"
@@ -30,10 +30,8 @@ services:
       - stonehenge-network
 
   db:
-    container_name: "${COMPOSE_PROJECT_NAME}-db"
-    image: druidfi/mariadb:10.9-drupal
-    volumes:
-      - db_data:/var/lib/mysql
+    container_name: ${COMPOSE_PROJECT_NAME}-db
+    image: druidfi/mariadb:10.6-drupal-lts
     ports:
       - "3306"
 
@@ -42,7 +40,6 @@ networks:
     external: true
 
 volumes:
-  db_data:
   ssh:
     name: stonehenge-ssh
     external: true
