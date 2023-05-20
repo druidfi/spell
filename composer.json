@@ -1,13 +1,13 @@
 {
     "name": "druidfi/spell",
-    "description": "Spell to create a new Drupal 9 project",
+    "description": "Spell to create a new Drupal project",
     "type": "project",
     "license": "MIT",
     "homepage": "https://github.com/druidfi/spell",
     "authors": [
         {
             "name": "Druid.fi",
-            "email": "info@druid.fi"
+            "homepage": "https://github.com/druidfi"
         }
     ],
     "minimum-stability": "dev",
