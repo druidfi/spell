@@ -8,14 +8,14 @@ services:
       - .:/app:delegated
       - ssh:/tmp/druid_ssh-agent:ro
     environment:
-      APP_ENV: "${APP_ENV:-dev}"
-      DRUSH_OPTIONS_URI: "https://${DRUPAL_HOSTNAME}"
-      PHP_SENDMAIL_PATH: "/usr/sbin/sendmail -S stonehenge:1025"
+      APP_ENV: ${APP_ENV:-dev}
+      DRUSH_OPTIONS_URI: https://${DRUPAL_HOSTNAME}
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -S stonehenge:1025
       # Run `export XDEBUG_ENABLE=true` to enable xdebug.
       XDEBUG_ENABLE: "${XDEBUG_ENABLE:-false}"
-      SIMPLETEST_BASE_URL: "http://app:8080"
-      SIMPLETEST_DB: "mysql://drupal:drupal@db:3306/drupal"
-      BROWSERTEST_OUTPUT_BASE_URL: "https://${DRUPAL_HOSTNAME}"
+      SIMPLETEST_BASE_URL: http://app:8080
+      SIMPLETEST_DB: mysql://drupal:drupal@db:3306/drupal
+      BROWSERTEST_OUTPUT_BASE_URL: https://${DRUPAL_HOSTNAME}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app.entrypoints=https"
@@ -31,9 +31,9 @@ services:
 
   db:
     container_name: ${COMPOSE_PROJECT_NAME}-db
-    image: druidfi/mariadb:10.6-drupal-lts
+    image: druidfi/mariadb:10.11-drupal-lts
     ports:
-      - "3306"
+      - 3306
 
 networks:
   stonehenge-network:
