@@ -1,8 +1,8 @@
 services:
 
   app:
-    hostname: ${DRUPAL_HOSTNAME}
     container_name: ${COMPOSE_PROJECT_NAME}-app
+    hostname: ${DRUPAL_HOSTNAME}
     image: druidfi/drupal-web:php-${PHP_VERSION}
     volumes:
       - .:/app:delegated
@@ -10,11 +10,10 @@ services:
     environment:
       APP_ENV: ${APP_ENV:-dev}
       DRUSH_OPTIONS_URI: https://${DRUPAL_HOSTNAME}
-      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -S stonehenge:1025
-      # Run `export XDEBUG_ENABLE=true` to enable xdebug.
-      XDEBUG_ENABLE: "${XDEBUG_ENABLE:-false}"
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -S host.docker.internal:1025 -t
       SIMPLETEST_BASE_URL: http://app:8080
       SIMPLETEST_DB: mysql://drupal:drupal@db:3306/drupal
+      XDEBUG_ENABLE: ${XDEBUG_ENABLE:-false}
       BROWSERTEST_OUTPUT_BASE_URL: https://${DRUPAL_HOSTNAME}
     labels:
       - "traefik.enable=true"
@@ -34,6 +33,10 @@ services:
     image: druidfi/mariadb:10.11-drupal-lts
     ports:
       - 3306
+
+  redis:
+    container_name: ${COMPOSE_PROJECT_NAME}-redis
+    image: redis:7-alpine
 
 networks:
   stonehenge-network:

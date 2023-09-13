@@ -22,13 +22,13 @@ You need to have these applications installed to operate on all environments:
 
 For the first time (new project):
 
-``` shell
+```console
 make new
 ```
 
 And following times to create and start the environment:
 
-``` shell
+```console
 make fresh
 ```
 
@@ -38,6 +38,6 @@ NOTE: Change these according to the state of your project.
 
 This will log you inside the app container:
 
-``` shell
+```console
 make shell
 ```

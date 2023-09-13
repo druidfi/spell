@@ -26,13 +26,13 @@ environment with Stonehenge.
 
 If you have PHP and Composer installed on your host (recommended):
 
-```shell
+```console
 composer create-project druidfi/spell:dev-main yoursite --no-interaction
 ```
 
 Or using Docker image:
 
-```shell
+```console
 mkdir yoursite && cd yoursite && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
     druidfi/drupal-web:php-8.2 \
@@ -51,7 +51,7 @@ Now you need to have Stonehenge up & running.
 
 Start the development environment, build development codebase and install empty site with minimal profile:
 
-```shell
+```console
 make new
 ```
 
@@ -69,14 +69,14 @@ You can run `make help` to list all available commands for you.
 
 On macOS you need first to install Chromedriver and allow it to execute:
 
-```shell
+```console
 brew install chromedriver
 xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver
 ```
 
 Then run the same test scenario as in Github Actions:
 
-```shell
+```console
 make test
 ```
 
