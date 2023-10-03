@@ -9,9 +9,6 @@
 /public/sites/simpletest
 /vendor/
 
-# Ignore the folder created by PhpStorm
-.idea/*
-
 # Ignore OSX generated files
 .DS_Store
 ._*
