@@ -7,7 +7,7 @@ environment with Stonehenge.
 
 ## Includes
 
-- Drupal 10.1.x
+- Drupal 10.2.x
 - Drush 12.x
 - Docker Composer setup for development, see [docker-compose.yml](docker-compose.yml)
 - [druidfi/tools](https://github.com/druidfi/tools)
@@ -61,7 +61,7 @@ Now your site can can be accessed from https://yoursite.docker.so
 
 Git has been init in the project, but you need to specify your remote before you can push.
 
-Also this README.md has been replaced with [this one](README.project.md).
+Also, this README.md has been replaced with [this one](README.project.md).
 
 You can run `make help` to list all available commands for you.
 
