@@ -2,7 +2,7 @@ services:
 
   app:
     container_name: ${COMPOSE_PROJECT_NAME}-app
-    hostname: ${DRUPAL_HOSTNAME}
+    hostname: ${COMPOSE_PROJECT_NAME}
     image: druidfi/drupal-web:php-${PHP_VERSION}
     volumes:
       - .:/app:delegated
