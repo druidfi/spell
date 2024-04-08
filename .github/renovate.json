@@ -5,5 +5,9 @@
     "github>druidfi/renovate-config:global",
     "github>druidfi/renovate-config:drupal",
     "github>druidfi/renovate-config:js"
-  ]
+  ],
+  "baseBranches": ["main"],
+  "constraints": {
+    "php": "8.2.17"
+  }
 }
