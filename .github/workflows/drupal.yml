@@ -81,8 +81,8 @@ jobs:
       - name: Operate on Drupal
         run: |
           vendor/bin/drush status
-          composer require --no-progress drupal/ctools
-          vendor/bin/drush en --yes ctools
+#          composer require --no-progress drupal/ctools
+#          vendor/bin/drush en --yes ctools
 
       - name: Run web server with Drush
         run: |
