@@ -46,7 +46,7 @@ jobs:
       - name: Setup PHP with composer v2
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.3
           tools: composer:v2
 
       - name: Validate composer.json
@@ -81,8 +81,8 @@ jobs:
       - name: Operate on Drupal
         run: |
           vendor/bin/drush status
-          composer require --no-progress drupal/ctools
-          vendor/bin/drush en --yes ctools
+#          composer require --no-progress drupal/ctools
+#          vendor/bin/drush en --yes ctools
 
       - name: Run web server with Drush
         run: |

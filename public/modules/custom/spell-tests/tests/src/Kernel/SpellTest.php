@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\Tests\spell\Kernel;
 
@@ -22,7 +22,7 @@ class SpellTest extends KernelTestBase {
    * Make sure kernel test is ran.
    */
   public function testKernelTest() : void {
-    $this->assertEquals('Spell', \Drupal::moduleHandler()->getName('spell'));
+    $this->assertEquals('Spell', \Drupal::service('extension.list.module')->getName('spell'));
   }
 
 }
