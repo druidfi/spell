@@ -14,8 +14,7 @@ Description of your project.
 
 You need to have these applications installed to operate on all environments:
 
-- Docker
-- [Stonehenge](https://github.com/druidfi/stonehenge)
+- [Docker and Stonehenge](https://github.com/druidfi/stonehenge)
 - [Github CLI](https://cli.github.com/)
 
 ## Create and start the environment

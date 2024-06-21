@@ -179,9 +179,11 @@
       <path value="$PROJECT_DIR$/vendor/behat/mink-selenium2-driver" />
       <path value="$PROJECT_DIR$/vendor/mck89/peast" />
       <path value="$PROJECT_DIR$/vendor/drush/drush" />
+      <path value="$PROJECT_DIR$/vendor/lullabot/mink-selenium2-driver" />
+      <path value="$PROJECT_DIR$/vendor/lullabot/php-webdriver" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />
   <component name="PhpStan">
     <PhpStan_settings>
       <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />

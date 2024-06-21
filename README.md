@@ -7,7 +7,7 @@ environment with Stonehenge.
 
 ## Includes
 
-- Drupal 10.2.x
+- Drupal 10.3.x
 - Drush 12.x
 - Docker Composer setup for development, see [docker-compose.yml](docker-compose.yml)
 - [druidfi/tools](https://github.com/druidfi/tools)
@@ -18,7 +18,7 @@ environment with Stonehenge.
 ## Requirements
 
 - PHP and Composer
-- [Docker and Stonehenge](https://druidfi.github.io/guidelines/docs/local_dev_env.html)
+- [Docker and Stonehenge](https://github.com/druidfi/stonehenge)
 
 ## Create a new project
 
