@@ -18,7 +18,7 @@ environment with Stonehenge.
 ## Requirements
 
 - PHP and Composer
-- [Docker and Stonehenge](https://druidfi.github.io/guidelines/docs/local_dev_env.html)
+- [Docker and Stonehenge](https://github.com/druidfi/stonehenge)
 
 ## Create a new project
 
