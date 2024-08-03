@@ -94,7 +94,7 @@ jobs:
 
       - name: Run PHPUnit tests
         run: |
-          set -o pipefail && vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml.dist --verbose
+          set -o pipefail && vendor/bin/phpunit -c $GITHUB_WORKSPACE/phpunit.xml.dist
 
       - name: Create an artifact from test report
         uses: actions/upload-artifact@v4
