@@ -20,7 +20,7 @@
         "druidfi/omen": "^0.9.0",
         "drupal/core-composer-scaffold": "^11.0",
         "drupal/core-recommended": "^11.0",
-        "drush/drush": "^13.0.1",
+        "drush/drush": "^13.1.1",
         "oomphinc/composer-installers-extender": "^2.0.1"
     },
     "require-dev": {
