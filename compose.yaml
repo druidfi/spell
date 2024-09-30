@@ -3,7 +3,7 @@ services:
   app:
     container_name: ${COMPOSE_PROJECT_NAME}-app
     hostname: ${COMPOSE_PROJECT_NAME}
-    image: druidfi/drupal-web:v8.3.10
+    image: druidfi/drupal-web:v8.3.12
     volumes:
       - .:/app:delegated
       - ssh:/tmp/druid_ssh-agent:ro
