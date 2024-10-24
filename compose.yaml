@@ -7,16 +7,17 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      valkey:
+        condition: service_healthy
     volumes:
       - .:/app:delegated
-      - ssh:/tmp/druid_ssh-agent:ro
     environment:
       APP_ENV: ${APP_ENV:-dev}
       DRUSH_OPTIONS_URI: https://${DRUPAL_HOSTNAME}
+      REDIS_HOST: ${COMPOSE_PROJECT_NAME}-valkey
       SIMPLETEST_BASE_URL: http://app:8080
       SIMPLETEST_DB: mysql://drupal:drupal@db:3306/drupal
       XDEBUG_ENABLE: ${XDEBUG_ENABLE:-false}
-      BROWSERTEST_OUTPUT_BASE_URL: https://${DRUPAL_HOSTNAME}
     labels:
       - traefik.enable=true
       - traefik.http.routers.${COMPOSE_PROJECT_NAME}-app.entrypoints=https
@@ -36,20 +37,20 @@ services:
     ports:
       - 3306
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pdrupal"]
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-pdrupal" ]
       interval: 5s
+      timeout: 5s
+      retries: 3
+
+  valkey:
+    container_name: ${COMPOSE_PROJECT_NAME}-valkey
+    image: valkey/valkey:8-alpine
+    healthcheck:
+      test: '[ "$$(valkey-cli -h 127.0.0.1 ping)" == "PONG" ]'
+      interval: 1s
       timeout: 5s
       retries: 5
 
-  redis:
-    container_name: ${COMPOSE_PROJECT_NAME}-redis
-    image: redis:7-alpine
-
 networks:
   stonehenge-network:
-    external: true
-
-volumes:
-  ssh:
-    name: stonehenge-ssh
     external: true
