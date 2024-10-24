@@ -8,7 +8,7 @@
   ],
   "baseBranches": ["main"],
   "constraints": {
-    "php": "8.3.8"
+    "php": "8.3.12"
   },
   "enabled": true
 }
