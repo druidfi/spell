@@ -1,12 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base",
+    "config:recommended",
     "github>druidfi/renovate-config:global",
     "github>druidfi/renovate-config:drupal",
     "github>druidfi/renovate-config:js"
   ],
-  "baseBranches": ["main"],
+  "baseBranches": [
+    "main"
+  ],
   "constraints": {
     "php": "8.3.13"
   },
