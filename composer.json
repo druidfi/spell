@@ -18,13 +18,13 @@
         "composer/installers": "^2.3.0",
         "cweagans/composer-patches": "^1.7.3",
         "druidfi/omen": "^0.9.0",
-        "drupal/core-composer-scaffold": "^11.0",
-        "drupal/core-recommended": "^11.0",
+        "drupal/core-composer-scaffold": "^11.1",
+        "drupal/core-recommended": "^11.1",
         "drush/drush": "^13.3.3",
         "oomphinc/composer-installers-extender": "^2.0.1"
     },
     "require-dev": {
-        "drupal/core-dev-pinned": "^11.0"
+        "drupal/core-dev-pinned": "^11.1"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -35,11 +35,12 @@
         "allow-plugins": {
             "composer/installers": true,
             "cweagans/composer-patches": true,
-            "drupal/core-composer-scaffold": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "phpstan/extension-installer": true,
+            "drupal/core-composer-scaffold": true,
             "oomphinc/composer-installers-extender": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true
         }
     },
     "extra": {
