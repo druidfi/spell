@@ -7,9 +7,9 @@ environment with Stonehenge.
 
 ## Includes
 
-- Drupal 11.1.x
+- Drupal 11.1.x (Core and CMS variants)
 - Drush 13.x
-- Docker Composer setup for development, see [docker-compose.yml](docker-compose.yml)
+- Docker Composer setup for development
 - [druidfi/tools](https://github.com/druidfi/tools)
 - Web root is `./public`
 - Configuration is in `./conf/cmi`
@@ -23,28 +23,39 @@ environment with Stonehenge.
 
 ## Create a new project
 
-### 1. using Composer
-
 If you have PHP and Composer installed on your host (recommended):
 
+### Drupal core
+
 ```console
-composer create-project druidfi/spell:dev-main yoursite --no-interaction
+composer create-project druidfi/spell:dev-core yoursite --no-interaction
+```
+
+### Drupal CMS
+
+```console
+composer create-project druidfi/spell:dev-cms yoursite --no-interaction
 ```
 
 Or using Docker image:
+
+### Drupal core
 
 ```console
 mkdir yoursite && cd yoursite && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
     druidfi/drupal-web:php-8.3 \
-    composer create-project druidfi/spell:dev-main . --no-interaction
+    composer create-project druidfi/spell:dev-core . --no-interaction
 ```
 
-### 2. using GitHub template
+### Drupal CMS
 
-Go to https://github.com/druidfi/spell/generate and create your own repository.
-
-When you have cloned your repo, move to `Get Started` section.
+```console
+mkdir yoursite && cd yoursite && \
+docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
+    druidfi/drupal-web:php-8.3 \
+    composer create-project druidfi/spell:dev-cms . --no-interaction
+```
 
 ## Get started
 
