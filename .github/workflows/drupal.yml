@@ -5,7 +5,8 @@ on:
   push:
     branches:
       # Push events on main branch
-      - main
+      - core
+      - cms
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '0 0 * * *'
