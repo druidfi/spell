@@ -28,13 +28,13 @@ If you have PHP and Composer installed on your host (recommended):
 ### Drupal core
 
 ```console
-composer create-project druidfi/spell:dev-core yoursite --no-interaction
+composer -n create-project druidfi/spell:dev-core my-drupal-site
 ```
 
 ### Drupal CMS
 
 ```console
-composer create-project druidfi/spell:dev-cms yoursite --no-interaction
+composer -n create-project druidfi/spell:dev-cms my-drupal-cms-site
 ```
 
 ## Create a new project with Docker image
@@ -44,19 +44,19 @@ If you don't have PHP and Composer, but you have Docker installed:
 ### Drupal core
 
 ```console
-mkdir yoursite && cd yoursite && \
+mkdir my-drupal-site && cd my-drupal-site && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
     druidfi/drupal-web:php-8.3 \
-    composer create-project druidfi/spell:dev-core . --no-interaction
+    composer -n create-project druidfi/spell:dev-core .
 ```
 
 ### Drupal CMS
 
 ```console
-mkdir yoursite && cd yoursite && \
+mkdir my-drupal-cms-site && cd my-drupal-cms-site && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
     druidfi/drupal-web:php-8.3 \
-    composer create-project druidfi/spell:dev-cms . --no-interaction
+    composer -n create-project druidfi/spell:dev-cms .
 ```
 
 ## Get started
