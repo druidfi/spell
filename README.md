@@ -75,8 +75,6 @@ Now your site can can be accessed from https://yoursite.docker.so
 
 Git has been init in the project, but you need to specify your remote before you can push.
 
-Also, this README.md has been replaced with [this one](README.project.md).
-
 You can run `make help` to list all available commands for you.
 
 ## Running tests on Spell when developing
