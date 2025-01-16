@@ -9,7 +9,7 @@ environment with Stonehenge.
 
 - Drupal 11.1.x ([Core](https://github.com/druidfi/spell/tree/core) and [CMS](https://github.com/druidfi/spell/tree/cms) variants)
 - Drush 13.x
-- Docker Composer setup for development
+- Docker Compose setup for development
 - [druidfi/tools](https://github.com/druidfi/tools)
 - Web root is `./public`
 - Configuration is in `./conf/cmi`

@@ -1,21 +1,2 @@
 /.idea/
-
-# Ignore project files that should not be in version control
-/drush/contrib/
-/node_modules
-/public/core/
-/public/modules/contrib/
-/public/themes/contrib/
-/public/profiles/contrib/
-/public/sites/default/files
-/public/sites/simpletest
-/vendor/
-
-# Ignore OSX generated files
 .DS_Store
-._*
-.gitattributes
-*.sql
-
-# As this is project skeleton, we do not want to store composer.lock to version control
-composer.lock
