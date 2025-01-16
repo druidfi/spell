@@ -1,5 +1,0 @@
-name: Spell
-description: 'Spell tests for Drupal'
-type: module
-package: Custom
-core_version_requirement: ^9 || ^10 || ^11
