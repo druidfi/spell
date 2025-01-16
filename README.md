@@ -14,10 +14,11 @@ environment with Stonehenge.
 - Web root is `./public`
 - Configuration is in `./conf/cmi`
 - Custom modules can be created in `./public/modules/custom`
+- Recipes are in `./recipes`
 
 ## Requirements
 
-- PHP and Composer
+- PHP ^8.3 and Composer
 - [Docker and Stonehenge](https://github.com/druidfi/stonehenge)
 
 ## Create a new project
