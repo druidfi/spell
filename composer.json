@@ -63,10 +63,11 @@
             "public/libraries/{$name}": ["type:drupal-library", "type:bower-asset", "type:npm-asset"],
             "public/modules/contrib/{$name}": ["type:drupal-module"],
             "public/modules/custom/{$name}": ["type:drupal-module-custom"],
-            "public/profiles/{$name}": ["type:drupal-profile"],
+            "public/profiles/contrib/{$name}": ["type:drupal-profile"],
             "public/themes/contrib/{$name}": ["type:drupal-theme"],
             "public/themes/custom/{$name}": ["type:drupal-theme-custom"],
-            "drush/Commands/{$name}": ["type:drupal-drush"]
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "recipes/{$name}": ["type:drupal-recipe"]
         }
     },
     "repositories": [
