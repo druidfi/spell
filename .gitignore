@@ -2,11 +2,14 @@
 /drush/contrib/
 /node_modules
 /public/core/
+/public/libraries/*/
 /public/modules/contrib/
 /public/themes/contrib/
 /public/profiles/contrib/
 /public/sites/default/files
 /public/sites/simpletest
+/recipes/drupal_*/
+/recipes/easy_email_*/
 /vendor/
 
 # Ignore OSX generated files
