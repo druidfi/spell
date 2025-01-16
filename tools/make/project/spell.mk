@@ -10,8 +10,7 @@ ifeq ($(UNAME_S),Darwin)
 else
 	@sed -i '/composer.lock/d' .gitignore
 endif
-	@rm -rf .env-e docs LICENSE.md README.md tools/make/project/spell.mk
-	@mv README.project.md README.md
+	@rm -rf .env-e docs LICENSE.md tools/make/project/spell.mk
 	@$(MAKE) self-update
 	@composer config --unset scripts.post-create-project-cmd
 	@git init --initial-branch=main && git add .
@@ -26,7 +25,7 @@ test-simpletest: SIMPLETEST_DB := mysql://drupal:drupal@$(DB_HOST)/drupal
 test-simpletest: vendor/bin/drush ## Run same tests as in GHA
 		$(call step,Start up database...\n)
 		@docker stop $(DB_CONTAINER) > /dev/null 2>&1 && docker rm $(DB_CONTAINER) > /dev/null 2>&1 || true
-		@docker run --name spell_db -p $(DB_PORT):3306 -d druidfi/mariadb:10.5-drupal > /dev/null 2>&1
+		@docker run --name spell_db -p $(DB_PORT):3306 -d druidfi/mysql:8.0-drupal-lts > /dev/null 2>&1
 		@echo "Created. Wait 5 seconds to database to initialize..." && sleep 5
 		$(call step,Do site-install...\n)
 		@DRUPAL_DB_HOST=$(DB_HOST) $(DRUSH) site-install --yes --quiet minimal && echo "Site is ready."
