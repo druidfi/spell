@@ -21,7 +21,7 @@ environment with Stonehenge.
 - PHP ^8.3 and Composer
 - [Docker and Stonehenge](https://github.com/druidfi/stonehenge)
 
-## Create a new project
+## Create a new project with Composer
 
 If you have PHP and Composer installed on your host (recommended):
 
@@ -37,7 +37,9 @@ composer create-project druidfi/spell:dev-core yoursite --no-interaction
 composer create-project druidfi/spell:dev-cms yoursite --no-interaction
 ```
 
-Or using Docker image:
+## Create a new project with Docker image
+
+If you don't have PHP and Composer, but you have Docker installed:
 
 ### Drupal core
 
