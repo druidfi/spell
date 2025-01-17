@@ -2,14 +2,13 @@ name: Drupal
 
 on:
   pull_request:
-  push:
     branches:
-      # Push events on main branch
       - core
       - cms
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0 0 * * *'
+  push:
+    branches:
+      - core
+      - cms
   workflow_dispatch:
 
 env:
@@ -48,7 +47,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.3
-          tools: composer:v2
 
       - name: Validate composer.json
         run: composer validate
