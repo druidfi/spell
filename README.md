@@ -1,9 +1,7 @@
 # druidfi/spell
 
-![Drupal](https://github.com/druidfi/spell/workflows/Drupal/badge.svg)
-
 This is a skeleton repository which will create a new Drupal project for you and setup Docker based development
-environment with Stonehenge.
+environment with Stonehenge. See requirements below.
 
 ## Includes
 
