@@ -13,18 +13,18 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "composer-runtime-api": "^2",
         "composer/installers": "^2.3.0",
         "cweagans/composer-patches": "^1.7.3",
         "druidfi/omen": "^0.9.0",
-        "drupal/core-composer-scaffold": "^11.1",
-        "drupal/core-recommended": "^11.1",
+        "drupal/core-composer-scaffold": "^11.2",
+        "drupal/core-recommended": "^11.2",
         "drush/drush": "^13.6.2",
         "oomphinc/composer-installers-extender": "^2.0.1"
     },
     "require-dev": {
-        "drupal/core-dev-pinned": "^11.1"
+        "drupal/core-dev-pinned": "^11.2"
     },
     "conflict": {
         "drupal/drupal": "*"
