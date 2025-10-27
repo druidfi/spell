@@ -5,7 +5,7 @@ environment with Stonehenge. See requirements below.
 
 ## Includes
 
-- Drupal 11.1.x ([Core](https://github.com/druidfi/spell/tree/core) and [CMS](https://github.com/druidfi/spell/tree/cms) variants)
+- Drupal 11.2.x ([Core](https://github.com/druidfi/spell/tree/core) and [CMS](https://github.com/druidfi/spell/tree/cms) variants)
 - Drush 13.x
 - Docker Compose setup for development
 - [druidfi/tools](https://github.com/druidfi/tools)
@@ -16,7 +16,7 @@ environment with Stonehenge. See requirements below.
 
 ## Requirements
 
-- PHP ^8.3 and Composer
+- PHP ^8.4 and Composer
 - [Docker and Stonehenge](https://github.com/druidfi/stonehenge)
 
 ## Create a new project with Composer
@@ -44,7 +44,7 @@ If you don't have PHP and Composer, but you have Docker installed:
 ```console
 mkdir my-drupal-site && cd my-drupal-site && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
-    druidfi/drupal-web:php-8.3 \
+    ghcr.io/druidfi/drupal-web:php-8.4.14\
     composer -n create-project druidfi/spell:dev-core .
 ```
 
@@ -53,7 +53,7 @@ docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
 ```console
 mkdir my-drupal-cms-site && cd my-drupal-cms-site && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
-    druidfi/drupal-web:php-8.3 \
+    ghcr.io/druidfi/drupal-web:php-8.4.14 \
     composer -n create-project druidfi/spell:dev-cms .
 ```
 
