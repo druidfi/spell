@@ -3,7 +3,7 @@ services:
   app:
     container_name: ${COMPOSE_PROJECT_NAME}-app
     hostname: ${COMPOSE_PROJECT_NAME}
-    image: druidfi/drupal-web:v8.4.13
+    image: ghcr.io/druidfi/drupal-web:php-8.4.14
     depends_on:
       db:
         condition: service_healthy
