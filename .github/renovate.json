@@ -6,7 +6,7 @@
     "github>druidfi/renovate-config:drupal",
     "github>druidfi/renovate-config:js"
   ],
-  "baseBranches": [
+  "baseBranchPatterns": [
     "core",
     "cms"
   ],
