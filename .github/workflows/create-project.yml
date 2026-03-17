@@ -40,6 +40,9 @@ jobs:
       - name: Create project (${{ matrix.variant }})
         run: composer -n create-project druidfi/spell:dev-${{ matrix.variant }} my-drupal-site
 
+      - name: Fix sites/default permissions
+        run: chmod 777 my-drupal-site/public/sites/default
+
       - name: Create compose.override.yaml
         run: |
           cat > my-drupal-site/compose.override.yaml << 'EOF'
