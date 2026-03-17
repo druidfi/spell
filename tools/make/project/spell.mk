@@ -3,7 +3,7 @@ TEST_TARGETS := test-simpletest
 PHONY += cast-spell
 cast-spell: BASENAME := $(shell basename $(CURDIR))
 cast-spell: ## Init Spell project
-	$(call step,Init Spell project...\n)
+	$(call step,Init Spell project...)
 	@sed -i -e 's|mysite|'"${BASENAME}"'|g' .env
 ifeq ($(UNAME_S),Darwin)
 	@sed -i '' '/composer.lock/d' .gitignore
@@ -13,12 +13,7 @@ endif
 	@rm -rf .env-e docs LICENSE.md tools/make/project/spell.mk
 	@$(MAKE) self-update
 	@composer config --unset scripts.post-create-project-cmd
-	$(call step,Init git...\n)
 	@git init --initial-branch=main && git add .
-	@$(MAKE) up
-	$(call step,Ready. Opening Drupal CMS installer...\n)
-	@sleep 5
-	@open https://$(BASENAME).docker.so/
 
 PHONY += test-simpletest
 test-simpletest: DB_CONTAINER := spell_db
