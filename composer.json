@@ -18,8 +18,8 @@
         "composer/installers": "^2.3.0",
         "cweagans/composer-patches": "^2.0.0",
         "druidfi/omen": "^0.9.0",
-        "drupal/core-composer-scaffold": "^11.2",
-        "drupal/core-recommended": "^11.2",
+        "drupal/core-composer-scaffold": "^11.3",
+        "drupal/core-recommended": "^11.3",
         "drupal/drupal_cms_accessibility_tools": "~1.2.0",
         "drupal/drupal_cms_ai": "~1.2.0",
         "drupal/drupal_cms_analytics": "~1.2.0",
@@ -33,12 +33,12 @@
         "drupal/drupal_cms_project": "~1.2.0",
         "drupal/drupal_cms_seo_tools": "~1.2.0",
         "drupal/drupal_cms_starter": "~1.2.0",
-        "drupal/project_browser": "@alpha",
+        "drupal/project_browser": "^2.1",
         "drupal/webform": "@beta",
         "drush/drush": "^13.7.1"
     },
     "require-dev": {
-        "drupal/core-dev-pinned": "^11.2"
+        "drupal/core-dev-pinned": "^11.3"
     },
     "conflict": {
         "drupal/drupal": "*"
