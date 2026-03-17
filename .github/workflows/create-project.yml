@@ -52,6 +52,9 @@ jobs:
                 - "8080:8080"
               environment:
                 DRUPAL_ROUTES: http://localhost:8080
+            db:
+              healthcheck:
+                test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--protocol=tcp", "-udrupal", "-pdrupal"]
           EOF
 
       - name: Print Docker Compose config
