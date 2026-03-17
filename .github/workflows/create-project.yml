@@ -48,7 +48,6 @@ jobs:
           cat > my-drupal-site/compose.override.yaml << EOF
           services:
             app:
-              user: "$(id -u):$(id -g)"
               ports:
                 - "8080:8080"
               environment:
@@ -61,7 +60,7 @@ jobs:
 
       - name: Install Drupal
         working-directory: my-drupal-site
-        run: make new
+        run: make new DRUPAL_NEW_TARGETS="up drupal-create-folders drush-si drush-uli"
 
       - name: Test Drupal site is accessible
         run: curl -sfI http://localhost:8080
