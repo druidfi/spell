@@ -1,0 +1,38 @@
+name: Create Project
+
+on:
+  pull_request:
+    branches:
+      - main
+      - core
+      - cms
+  push:
+    branches:
+      - main
+      - core
+      - cms
+  workflow_dispatch:
+
+jobs:
+
+  create-project:
+
+    permissions:
+      contents: read
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [core, cms]
+
+    steps:
+
+      - name: Setup PHP with Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+
+      - name: Create project (${{ matrix.variant }})
+        run: composer -n create-project druidfi/spell:dev-${{ matrix.variant }} my-drupal-site
