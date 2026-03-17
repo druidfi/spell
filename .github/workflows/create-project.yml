@@ -29,6 +29,9 @@ jobs:
 
     steps:
 
+      - name: Create Docker network
+        run: docker network create stonehenge-network
+
       - name: Setup PHP with Composer
         uses: shivammathur/setup-php@v2
         with:
@@ -36,3 +39,25 @@ jobs:
 
       - name: Create project (${{ matrix.variant }})
         run: composer -n create-project druidfi/spell:dev-${{ matrix.variant }} my-drupal-site
+
+      - name: Create compose.override.yaml
+        run: |
+          cat > my-drupal-site/compose.override.yaml << 'EOF'
+          services:
+            app:
+              ports:
+                - "8080:8080"
+              environment:
+                DRUPAL_ROUTES: http://localhost:8080
+          EOF
+
+      - name: Print Docker Compose config
+        working-directory: my-drupal-site
+        run: make config
+
+      - name: Install Drupal
+        working-directory: my-drupal-site
+        run: make new
+
+      - name: Test Drupal site is accessible
+        run: curl -sfI http://localhost:8080
