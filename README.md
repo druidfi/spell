@@ -5,7 +5,7 @@ environment with Stonehenge. See requirements below.
 
 ## Includes
 
-- Drupal 11.2.x ([Core](https://github.com/druidfi/spell/tree/core) and [CMS](https://github.com/druidfi/spell/tree/cms) variants)
+- Drupal 11.3.x ([Core](https://github.com/druidfi/spell/tree/core) and [CMS](https://github.com/druidfi/spell/tree/cms) variants)
 - Drush 13.x
 - Docker Compose setup for development
 - [druidfi/tools](https://github.com/druidfi/tools)
@@ -44,7 +44,7 @@ If you don't have PHP and Composer, but you have Docker installed:
 ```console
 mkdir my-drupal-site && cd my-drupal-site && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
-    ghcr.io/druidfi/drupal-web:php-8.4.14\
+    ghcr.io/druidfi/drupal-web:php-8.4.18\
     composer -n create-project druidfi/spell:dev-core .
 ```
 
@@ -53,7 +53,7 @@ docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
 ```console
 mkdir my-drupal-cms-site && cd my-drupal-cms-site && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
-    ghcr.io/druidfi/drupal-web:php-8.4.14 \
+    ghcr.io/druidfi/drupal-web:php-8.4.18 \
     composer -n create-project druidfi/spell:dev-cms .
 ```
 
