@@ -15,16 +15,16 @@
     "require": {
         "php": "^8.4",
         "composer-runtime-api": "^2",
-        "composer/installers": "^2.3.0",
-        "cweagans/composer-patches": "^2.0.0",
-        "druidfi/omen": "^0.9.1",
+        "composer/installers": "^2.3",
+        "cweagans/composer-patches": "^2.0",
+        "druidfi/omen": "^0.9",
         "drupal/core-composer-scaffold": "^11.3",
         "drupal/core-recommended": "^11.3",
-        "drush/drush": "^13.7.1",
-        "oomphinc/composer-installers-extender": "^2.0.1"
+        "drush/drush": "^13.7",
+        "oomphinc/composer-installers-extender": "^2.0"
     },
     "require-dev": {
-        "drupal/core-dev-pinned": "^11.3"
+        "drupal/core-dev": "^11.3"
     },
     "conflict": {
         "drupal/drupal": "*"
