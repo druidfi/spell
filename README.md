@@ -44,7 +44,7 @@ If you don't have PHP and Composer, but you have Docker installed:
 ```console
 mkdir my-drupal-site && cd my-drupal-site && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
-    ghcr.io/druidfi/drupal-web:php-8.4.18\
+    ghcr.io/druidfi/drupal-web:php-8.4.21 \
     composer -n create-project druidfi/spell:dev-core .
 ```
 
@@ -53,7 +53,7 @@ docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
 ```console
 mkdir my-drupal-cms-site && cd my-drupal-cms-site && \
 docker run --rm -it -v $PWD:/app --env COMPOSER_MEMORY_LIMIT=-1 \
-    ghcr.io/druidfi/drupal-web:php-8.4.18 \
+    ghcr.io/druidfi/drupal-web:php-8.4.21 \
     composer -n create-project druidfi/spell:dev-cms .
 ```
 
