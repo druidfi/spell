@@ -3,7 +3,7 @@ services:
   app:
     container_name: ${COMPOSE_PROJECT_NAME}-app
     hostname: ${COMPOSE_PROJECT_NAME}
-    image: ghcr.io/druidfi/drupal-web:v8.4.21
+    image: ghcr.io/druidfi/drupal-web:v8.4.23
     depends_on:
       db:
         condition: service_healthy
@@ -33,7 +33,7 @@ services:
 
   db:
     container_name: ${COMPOSE_PROJECT_NAME}-db
-    image: druidfi/mysql:8.0-drupal-lts
+    image: druidfi/mysql:8.4-drupal-lts
     ports:
       - "3306"
     healthcheck:
