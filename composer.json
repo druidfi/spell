@@ -10,16 +10,14 @@
             "homepage": "https://github.com/druidfi"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
         "php": "^8.4",
         "composer-runtime-api": "^2",
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^2.0",
         "druidfi/omen": "^0.9",
-        "drupal/core-composer-scaffold": "^11.3",
-        "drupal/core-recommended": "^11.3",
+        "drupal/core-composer-scaffold": "^11.4",
+        "drupal/core-recommended": "^11.4",
         "drupal/drupal_cms_accessibility_tools": "^2",
         "drupal/drupal_cms_ai": "^2",
         "drupal/drupal_cms_analytics": "^2",
@@ -34,12 +32,14 @@
         "drupal/drupal_cms_seo_tools": "^2",
         "drupal/drupal_cms_starter": "^2",
         "drupal/project_browser": "^2.1",
-        "drupal/webform": "@beta",
+        "drupal/webform": "^6.3",
         "drush/drush": "^13.7"
     },
     "require-dev": {
-        "drupal/core-dev": "^11.3"
+        "drupal/core-dev": "^11.4"
     },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "conflict": {
         "drupal/drupal": "*"
     },
