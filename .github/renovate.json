@@ -12,5 +12,16 @@
   "constraints": {
     "php": "8.4.*"
   },
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "druidfi/drupal-web",
+        "ghcr.io/druidfi/drupal-web"
+      ],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr"
+    }
+  ],
   "enabled": true
 }
