@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^8.4",
+        "php": "^8.5",
         "composer-runtime-api": "^2",
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^2.0",
@@ -33,7 +33,7 @@
         "drupal/drupal_cms_starter": "^2",
         "drupal/project_browser": "^2.1",
         "drupal/webform": "^6.3",
-        "drush/drush": "^13.7"
+        "drush/drush": "^13.8"
     },
     "require-dev": {
         "drupal/core-dev": "^11.4"
