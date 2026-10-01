@@ -43,6 +43,12 @@ sf-update: ## Update Symfony packages with Composer
 	$(call step,Update Symfony packages with Composer...\n)
 	$(call composer,update -W "doctrine/*" "symfony/*" "twig/*" --no-scripts)
 
+PHONY += --deploy
+--deploy::
+	$(call step,Run post-deploy tasks...\n)
+	$(AT)BUILD=$(BUILD) op run --env-file="./.env.$(INSTANCE)" -- docker compose exec $(CLI_SERVICE) bin/console --ansi cache:clear
+	$(AT)BUILD=$(BUILD) op run --env-file="./.env.$(INSTANCE)" -- docker compose exec $(CLI_SERVICE) bin/console --ansi about
+
 PHONY += fresh
 fresh: ## Build fresh development environment
 	@$(MAKE) $(SF_FRESH_TARGETS)
@@ -57,15 +63,13 @@ lint-symfony: ## Lint Symfony code style
 	$(call step,Lint Symfony code style...\n)
 	$(call cs_symfony,fix --dry-run --diff --ansi --verbose src)
 
-ifeq ($(RUN_ON),docker)
+PHONY += update-symfony-docker
+update-symfony-docker: ## Update Symfony Docker files from upstream
+	$(AT)curl -sSL https://raw.githubusercontent.com/druidfi/tools/main/scripts/symfony/update.sh | sh -s
+
 define sf_console
 	$(call docker_compose_exec,bin/console $(1))
 endef
-else
-define sf_console
-	@bin/console $(1)
-endef
-endif
 
 ifeq ($(CS_FIXER_INSTALLED),yes)
 define cs_symfony
