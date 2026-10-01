@@ -8,13 +8,22 @@ DRUPAL_DISABLE_MODULES ?= no
 DRUPAL_ENABLE_MODULES ?= no
 DRUPAL_PROFILE ?= minimal
 DRUPAL_SITE_EMAIL ?= maintenance@druid.fi
-DRUPAL_SYNC_FILES ?= yes
+DRUPAL_SYNC_FILES ?= no
 DRUPAL_SYNC_SOURCE ?= main
 DRUSH_RSYNC_MODE ?= Pakzu
 DRUSH_RSYNC_OPTS ?=  -- --omit-dir-times --no-perms --no-group --no-owner --chmod=ugo=rwX
 DRUSH_RSYNC_EXCLUDE ?= css:ctools:js:php:tmp:tmp_php
 SYNC_TARGETS += drush-sync
 SYNC_FROM_REMOTE ?= no
+DRUPAL_THEME_NAME ?= $(firstword $(notdir $(wildcard $(WEBROOT)/themes/custom/*)))
+DRUPAL_THEME_PATH := $(shell pwd)/$(WEBROOT)/themes/custom/$(DRUPAL_THEME_NAME)
+
+# Point JS tooling (js-install, js-outdated, drupal-build-theme, drupal-watch-theme) at the
+# theme's package.json when there is no root package.json to take precedence.
+ifeq ($(shell test -f package.json && echo yes),yes)
+else ifneq ($(wildcard $(DRUPAL_THEME_PATH)/package.json),)
+PACKAGE_JSON_PATH := $(DRUPAL_THEME_PATH)
+endif
 CS_EXTS := inc,php,module,install,profile,theme
 CS_STANDARD_PATHS := vendor/drupal/coder/coder_sniffer,vendor/slevomat/coding-standard
 CS_STANDARDS := Drupal,DrupalPractice
@@ -48,6 +57,7 @@ PHONY += drupal-create-folders
 drupal-create-folders:
 	$(call step,Create folders for Drupal...\n)
 	$(call docker_compose_exec,mkdir -v -p $(DRUPAL_CREATE_FOLDERS))
+	@for folder in $(DRUPAL_CREATE_FOLDERS); do echo "$$folder"; done
 
 PHONY += drupal-update
 drupal-update: ## Update Drupal core with Composer
@@ -100,6 +110,11 @@ drush-deploy: ## Run Drush deploy
 	$(call step,Run Drush deploy...\n)
 	$(call drush,deploy)
 
+PHONY += --deploy
+--deploy::
+	$(call step,Run post-deploy tasks...\n)
+	$(AT)BUILD=$(BUILD) op run --env-file="./.env.$(INSTANCE)" -- docker compose exec $(CLI_SERVICE) drush --ansi deploy
+
 PHONY += drush-updb
 drush-updb: ## Run database updates
 	$(call step,Run database updates...\n)
@@ -151,7 +166,7 @@ drush-sync-db: ## Sync database
 	$(call drush,sql-drop --quiet -y)
 ifeq ($(DUMP_SQL_EXISTS),yes)
 	$(call step,Import local SQL dump...)
-	$(call drush,sql-query --file=${DOCKER_PROJECT_ROOT}/$(DUMP_SQL_FILENAME) && echo 'SQL dump imported')
+	$(call drush,sql-query --file=$(DOCKER_PROJECT_ROOT)/$(DUMP_SQL_FILENAME) && echo 'SQL dump imported')
 else
 ifeq ($(SYNC_FROM_REMOTE),yes)
 	$(call step,Sync database from @$(DRUPAL_SYNC_SOURCE)...)
@@ -183,7 +198,17 @@ open-db-gui: ## Open database with GUI tool
 	$(eval DB_NAME ?= drupal)
 	$(eval DB_USER ?= drupal)
 	$(eval DB_PASS ?= drupal)
-	@open mysql://$(DB_USER):$(DB_PASS)@$(shell docker compose port $(DB_SERVICE) 3306 | grep -v ::)/$(DB_NAME)
+	$(AT)open mysql://$(DB_USER):$(DB_PASS)@$(shell docker compose port $(DB_SERVICE) 3306 | grep -v ::)/$(DB_NAME)
+
+PHONY += drupal-build-theme
+drupal-build-theme:
+	$(call step,Build theme $(DRUPAL_THEME_NAME)...\n)
+	$(call node_run,run build)
+
+PHONY += drupal-watch-theme
+drupal-watch-theme:
+	$(call step,Watch theme $(DRUPAL_THEME_NAME)...\n)
+	$(call node_run,run dev)
 
 PHONY += fix-drupal
 fix-drupal: PATHS := $(subst $(space),,$(LINT_PATHS_PHP))
@@ -197,18 +222,6 @@ lint-drupal: ## Lint Drupal code style
 	$(call step,Lint Drupal code style with phpcs...\n)
 	$(call cs,phpcs,$(PATHS))
 
-PHONY += mmfix
-mmfix: MODULE := MISSING_MODULE
-mmfix:
-	$(call step,Remove missing module '$(MODULE)'\n)
-	$(call drush,sql-query \"DELETE FROM key_value WHERE collection='system.schema' AND name='$(MODULE)';\",Module was removed)
-
-ifeq ($(RUN_ON),docker)
 define drush
 	$(call docker_compose_exec,drush $(1),$(2))
 endef
-else
-define drush
-	@drush $(1)
-endef
-endif

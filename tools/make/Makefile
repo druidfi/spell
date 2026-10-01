@@ -1,15 +1,26 @@
 .DEFAULT_GOAL := help
 
+# Verbose mode: `make <target> V=1` (or VERBOSE=1) echoes the wrapped tool
+# calls instead of just the step banners.
+AT := @
+ifneq ($(V)$(VERBOSE),)
+AT :=
+endif
+
 BUILD_TARGETS :=
 COMPOSER_JSON_PATH ?= .
 DRUIDFI_TOOLS_MAKE_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
-ENV := dev
 PACKAGE_JSON_PATH ?= .
-RUN_ON := host
 UNAME_S := $(shell uname -s)
 # Shorten with https://git.io/ : https://raw.githubusercontent.com/druidfi/tools/main/update.sh
 UPDATE_SCRIPT_URL := https://git.io/JP10q
 WEBROOT ?= public
+
+DOCKER_ENV := $(shell test -f /.dockerenv && echo yes || echo no)
+
+ifeq ($(DOCKER_ENV),yes)
+$(error Run these commands outside Docker container)
+endif
 
 include $(DRUIDFI_TOOLS_MAKE_DIR)utils.mk
 
@@ -25,22 +36,16 @@ debug: ## Show debug information
 	$(call dbg,CLI_SERVICE,$(CLI_SERVICE))
 	$(call dbg,CLI_USER,$(if $(CLI_USER),$(CLI_USER),default user from CLI image))
 	$(call dbg,CLI_SHELL,${CLI_SHELL})
-	$(call dbg,ENV,${ENV})
 	$(call dbg,PHP on host,$(call has,php))
 	$(call dbg,PHP_BIN,$(shell command -v php || echo no))
-	$(call dbg,RUN_ON,${RUN_ON})
 	$(call dbg,Composer on host,$(call has,composer))
 	$(call dbg,COMPOSER_BIN,$(shell command -v composer || echo no))
 	$(call dbg,COMPOSER_JSON_EXISTS,${COMPOSER_JSON_EXISTS})
 	$(call dbg,IS_DRUPAL,${IS_DRUPAL})
 	$(call dbg,IS_SYMFONY,${IS_SYMFONY})
+	$(call dbg,DRUID_CLOUD,${DRUID_CLOUD})
 	$(call dbg,LAGOON,${LAGOON})
 	$(call dbg,SYSTEM,${SYSTEM})
 	$(call dbg,WEBROOT,${WEBROOT})
 	$(call dbg,UNAME_S,${UNAME_S})
-ifeq ($(RUN_ON),docker)
-	@printf "\n${YELLOW}Assumption: We should run on Docker and not on host${NO_COLOR}\n"
-else
-	@printf "\n${YELLOW}Assumption: We should run on host and not on Docker${NO_COLOR}\n"
-endif
 	@printf "\n${GREEN}End of debug.${NO_COLOR}\n"
