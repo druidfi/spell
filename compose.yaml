@@ -13,6 +13,7 @@ services:
       - .:/app:delegated
     environment:
       APP_ENV: ${APP_ENV:-dev}
+      COMPOSER_IGNORE_PLATFORM_REQ: ext-pdo_pgsql
       DRUSH_OPTIONS_URI: https://${DRUPAL_HOSTNAME}
       REDIS_HOST: ${COMPOSE_PROJECT_NAME}-valkey
       SIMPLETEST_BASE_URL: http://app:8080
