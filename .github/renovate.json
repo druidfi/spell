@@ -17,7 +17,6 @@
   "packageRules": [
     {
       "matchPackageNames": [
-        "druidfi/drupal-web",
         "ghcr.io/druidfi/drupal-web"
       ],
       "matchUpdateTypes": ["patch"],
