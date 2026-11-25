@@ -15,7 +15,7 @@
   "packageRules": [
     {
       "matchPackageNames": [
-        "ghcr.io/druidfi/drupal-web"
+        "ghcr.io/druidfi/app-php-8.5"
       ],
       "matchUpdateTypes": ["patch"],
       "automerge": true,
